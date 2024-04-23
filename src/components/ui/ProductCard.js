@@ -70,9 +70,10 @@ export const ProductCard = ({ product }) => {
           </div>
           <div className="mt-5">
             {product.talles.map(
-              (t) =>
+              (t,index) =>
                 t.stock > 0 && (
                   <Button
+key={index}
                     variant={size == t.nombre ? "" : "outline"}
                     className="font-mono uppercase mx-1"
                     onClick={() => setSize(t.nombre)}

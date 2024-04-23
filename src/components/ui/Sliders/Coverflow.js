@@ -31,8 +31,8 @@ export const SliderCoverflow = ({ products }) => {
       className="mySwiper py-10"
     >
       {products &&
-        products.map((e) => (
-          <SwiperSlide className="py-10">
+        products.map((e,index) => (
+          <SwiperSlide className="py-10" key={index}>
             <ProductCard product={e} />
           </SwiperSlide>
         ))}
