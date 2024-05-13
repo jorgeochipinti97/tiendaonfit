@@ -36,7 +36,12 @@ const Page = () => {
         Envio gratis a todo el país
       </p>
       <div className="grid md:grid-cols-3 grid-cols-1 mt-20">
-        {productos && productos.map((e) => <ProductCard product={e} />)}
+        {productos &&
+          productos.map((e) => (
+            <div key={e._id}>
+              <ProductCard product={e} />
+            </div>
+          ))}
       </div>
     </div>
   );
