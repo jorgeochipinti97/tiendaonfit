@@ -14,11 +14,24 @@ import {
 import { cn } from "@/lib/utils";
 
 export const Navbar = () => {
+  const [activeImage, setActiveImage] = React.useState("/index.png");
+
+  const handleMouseEnter = (imageSrc) => {
+    setActiveImage(imageSrc);
+  };
+
   return (
-    <NavigationMenu>
+    <NavigationMenu className=''>
       <NavigationMenuList>
         <NavigationMenuItem>
           <img src="/logo.png" className="w-[100px] ml-5" />
+        </NavigationMenuItem>
+        <NavigationMenuItem>
+          <Link href="/" legacyBehavior passHref>
+            <NavigationMenuLink className="mx-5 text-md md:text-xl tracking-tighter font-geist">
+              Inicio
+            </NavigationMenuLink>
+          </Link>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuTrigger className="text-md md:text-xl tracking-tighter font-geist">
@@ -29,33 +42,56 @@ export const Navbar = () => {
               <li className="row-span-3">
                 <NavigationMenuLink asChild className="hidden md:block">
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted  no-underline outline-none focus:shadow-md"
                     href="/"
                   >
                     <div className="mb-2 mt-4 text-lg font-medium">
-                      <img src="/ropa.webp" className="" />
+                      <img
+                        src={activeImage}
+                        className="h-[300px] rounded-xl"
+                      />
                     </div>
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Indumentaria">
+              <ListItem
+                href="/products?categoria=indumentaria"
+                title="Indumentaria"
+                onMouseEnter={() =>
+                  handleMouseEnter(
+                    "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714157906/OnFit6235_jc3kdi.webp"
+                  )
+                }
+                onMouseLeave={() => handleMouseEnter("/index.png")}
+              >
                 Re-usable components built using Radix UI and Tailwind CSS.
               </ListItem>
-              <ListItem href="/docs/installation" title="Accesorios">
+              <ListItem
+                href="/products?categoria=accesorios"
+                title="Accesorios"
+                onMouseEnter={() =>
+                  handleMouseEnter(
+                    "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714158023/OnFitII1671_fg8gce.jpg"
+                  )
+                }
+                onMouseLeave={() => handleMouseEnter("/index.png")}
+              >
                 How to install dependencies and structure your app.
               </ListItem>
-              <ListItem href="/docs/primitives/typography" title="Equipamiento">
+              <ListItem
+                href="/products?categoria=equipamiento"
+                title="Equipamiento"
+                onMouseEnter={() =>
+                  handleMouseEnter(
+                    "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714158681/CINTA_NORDIkA_840_uvona9.webp"
+                  )
+                }
+                onMouseLeave={() => handleMouseEnter("/index.png")}
+              >
                 Styles for headings, paragraphs, lists...etc
               </ListItem>
             </ul>
           </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <Link href="/docs" legacyBehavior passHref>
-            <NavigationMenuLink className="text-md md:text-xl tracking-tighter font-geist">
-              FAQS
-            </NavigationMenuLink>
-          </Link>
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>
