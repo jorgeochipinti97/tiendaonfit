@@ -28,13 +28,15 @@ const Page = () => {
   }, [products, searchParams]);
 
   return (
-    <div>
-      <p className="text-start ml-5 font-bold text-4xl  tracking-tighter">
-        3 Cuotas sin interés{" "}
-      </p>
-      <p className="text-start ml-5 font-bold text-4xl  tracking-tighter">
-        Envio gratis a todo el país
-      </p>
+    <div className="">
+      <div className="flex justify-around">
+        <p className="text-center  font-bold text-xl  tracking-tighter">
+          3 Cuotas sin interés{" "}
+        </p>
+        <p className="text-center  font-bold text-xl  tracking-tighter">
+          Envio gratis a todo el país
+        </p>
+      </div>
       <div className="grid md:grid-cols-3 grid-cols-1 mt-20">
         {productos &&
           productos.map((e) => (

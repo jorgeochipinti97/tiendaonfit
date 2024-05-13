@@ -60,14 +60,14 @@ const Page = () => {
     <div>
       <div className="fixed bottom-0 bg-black/90 w-screen flex justify-center py-2 z-50">
         <p className="font-bold text-white text-center font-geist tracking-tighter text-2xl md:text-4xl">
-          Envio gratis y 3 cuotas sin interés
+          Envio gratis  3 cuotas sin interés
         </p>
       </div>
       <div className="pb-20">
         {product && (
           <div>
-            <div className="my-5">
-              <p className="text-black text-center text-4xl md:text-7xl font-bold capitalize tracking-tighter font-geist ">
+            <div className="m-5">
+              <p className="text-black/60 text-center text-4xl md:text-7xl font-bold capitalize tracking-tighter font-geist ">
                 {product.titulo}
               </p>
             </div>
