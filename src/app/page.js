@@ -51,7 +51,8 @@ export default function Home() {
             {products &&
               products
                 .filter((r) => r.subcategoria == "remera_oversize")
-                .map((e) => <ProductCard product={e} />)}
+                .map((e) => <div key={e._id}><ProductCard product={e} /></div>)}
+          
             <ScrollBar orientation="horizontal" />
           </div>
         </ScrollArea>
@@ -77,7 +78,7 @@ export default function Home() {
             {products &&
               products
                 .filter((r) => r.subcategoria == "buzo")
-                .map((e) => <ProductCard product={e} />)}
+                .map((e) => <div key={e._id}><ProductCard product={e} /></div>)}
             <ScrollBar orientation="horizontal" />
           </div>
         </ScrollArea>
