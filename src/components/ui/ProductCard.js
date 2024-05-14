@@ -63,7 +63,7 @@ export const ProductCard = ({ product }) => {
 
             </CardTitle>
             <CardContent
-              className="h-[300px] md:h-[500px]  rounded-xl flex flex-col justify-end"
+              className="h-[300px] md:h-[400px]  rounded-xl flex flex-col justify-end"
               style={{
                 backgroundImage: `url(${product.images[0]})`,
                 backgroundSize: "cover",
