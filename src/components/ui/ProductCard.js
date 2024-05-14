@@ -53,8 +53,8 @@ export const ProductCard = ({ product }) => {
       );
   }, []);
   return (
-    <div className="flex justify-center  my-2">
-      <div className="w-10/12 ">
+    <div className="flex justify-center  m-2">
+      <div className="w-[300px] md:w-[400px] ">
         <div className="flex flex-col bg-black items-center justify-center rounded-xl  ">
           <Card className="  bg-transparent w-10/12 border-none">
             <CardTitle className=" text-center text-white py-5  ">
@@ -63,7 +63,7 @@ export const ProductCard = ({ product }) => {
 
             </CardTitle>
             <CardContent
-              className="h-[500px] md:h-[500px]  rounded-xl flex flex-col justify-end"
+              className="h-[300px] md:h-[500px]  rounded-xl flex flex-col justify-end"
               style={{
                 backgroundImage: `url(${product.images[0]})`,
                 backgroundSize: "cover",

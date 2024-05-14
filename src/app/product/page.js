@@ -58,11 +58,7 @@ const Page = () => {
 
   return (
     <div>
-      <div className="fixed bottom-0 bg-black/90 w-screen flex justify-center py-2 z-50">
-        <p className="font-bold text-white text-center font-geist tracking-tighter text-2xl md:text-4xl">
-          Envio gratis  3 cuotas sin interés
-        </p>
-      </div>
+
       <div className="pb-20">
         {product && (
           <div>

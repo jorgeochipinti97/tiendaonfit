@@ -1,9 +1,11 @@
 "use client";
+import { ProductCard } from "@/components/ui/ProductCard";
 import { SliderCards } from "@/components/ui/Sliders/Cards";
 import { SliderCoverflow } from "@/components/ui/Sliders/Coverflow";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+
 import { useProduct } from "@/hooks/useProducts";
 export default function Home() {
-
   const { products } = useProduct();
 
   return (
@@ -20,7 +22,6 @@ export default function Home() {
         Como si fuera poco, con tu compra te llevas un regalito de OnFit...
       </p>
 
-
       <div className="grid grid-cols-1 md:grid-cols-2 w-screen mt-5 md:mt-20">
         <div className="flex justify-center">
           <video
@@ -32,40 +33,54 @@ export default function Home() {
             className="w-10/12 md:w-5/12"
           />
         </div>
-        <div className="flex justify-center items-center mt-5 md:mt-0 ">
-          <div className="w-9/12 md:w-7/12">
+        <div className="flex justify-center ">
+          <img
+            src="/sale.jpeg"
+            className="w-11/12 md:w-8/12 my-10 rounded-xl"
+          />
+        </div>
+      </div>
+
+      <div>
+        <p className="font-geist font-bold text-4xl md:text-7xl  opacity-50 ml-5 mb-5 ">
+          Nuestras remeras Oversize
+        </p>
+
+        <ScrollArea className="  rounded-md border">
+          <div className="flex max-w-screen">
+            {products &&
+              products
+                .filter((r) => r.subcategoria == "remera_oversize")
+                .map((e) => <ProductCard product={e} />)}
+            <ScrollBar orientation="horizontal" />
+          </div>
+        </ScrollArea>
+      </div>
+      <div className="my-10  ">
+      <p className="font-geist font-bold text-4xl md:text-7xl  opacity-50 ml-5 mb-5 ">
+
+          Nuestra comunidad</p>
+        <div className="flex justify-center items-center  my-2 ">
+          <div className="w-11/12 md:w-12/12">
             <SliderCards />
           </div>
         </div>
       </div>
 
-      <div>
-        <p className="font-geist font-bold text-4xl md:text-7xl  opacity-50 ml-5 mb-5 mt-20">
-          Nuestras remeras Oversize
-        </p>
-        <div className="flex flex-wrap pb-10">
-          {products && (
-            <SliderCoverflow
-              initialSlide={3}
-              products={products.filter(
-                (e) => e.subcategoria == "remera_oversize"
-              )}
-            />
-          )}
-        </div>
-      </div>
-      <div>
-      <p className="font-geist font-bold text-4xl md:text-7xl mb-5  opacity-50 ml-5 ">
+      <div className="">
+        <p className="font-geist font-bold text-4xl md:text-7xl mb-5  opacity-50 ml-5 ">
           Nuestros buzos
         </p>
-        <div className="flex flex-wrap pb-10">
-          {products && (
-            <SliderCoverflow
-              initialSlide={1}
-              products={products.filter((e) => e.subcategoria == "buzo")}
-            />
-          )}
-        </div>
+
+        <ScrollArea className="  rounded-md border">
+          <div className="flex max-w-screen">
+            {products &&
+              products
+                .filter((r) => r.subcategoria == "buzo")
+                .map((e) => <ProductCard product={e} />)}
+            <ScrollBar orientation="horizontal" />
+          </div>
+        </ScrollArea>
       </div>
     </div>
   );

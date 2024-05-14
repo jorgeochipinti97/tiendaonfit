@@ -37,9 +37,9 @@ export const Cart = ({ isToast }) => {
   return (
     <AlertDialog className="z-50">
       <AlertDialogTrigger asChild>
-        <Button variant="icon" className="bg-yellow-300/90">
+        <Button variant="icon" className="bg-black/70 border border-white">
           {isToast ? (
-            <>Ver Carrito</>
+            <p className="text-white">Ver Carrito</p>
           ) : (
             <div>
               <span className="bg-sky-50 border border-black px-2 text-black  absolute bottom-8 right-10 text-md font-geist rounded-full">
@@ -53,12 +53,12 @@ export const Cart = ({ isToast }) => {
               >
                 <g>
                   <path
-                    fill="#000"
+                    fill="#f5f5f7"
                     d="M4.97 9.81A2 2 0 016.961 8H17.04a2 2 0 011.99 1.81l.762 8a2 2 0 01-1.99 2.19H6.2a2 2 0 01-1.991-2.19l.761-8z"
                     opacity="0.15"
                   ></path>
                   <path
-                    stroke="#000"
+                    stroke="#f5f5f7"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="1.5"
