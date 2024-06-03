@@ -338,7 +338,7 @@ function useGlobalForm() {
           currency: "ARS",
         });
 
-        // response && push(`/orders/${createOrderResponse.data._id}`);
+        response && push(`/order?_id=${createOrderResponse.data._id}`);
       }
     } catch (error) {
       console.error(error);
