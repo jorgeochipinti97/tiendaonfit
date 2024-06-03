@@ -167,9 +167,8 @@ function useGlobalForm() {
   const obtenerSiguienteCodigoDeSeguimiento = async () => {
     try {
       const response = await axios.post("/api/trackid");
-      console.log(response)
+      console.log(response);
       return response.data.codGestion;
-
     } catch (error) {
       console.error(
         "Error al obtener el siguiente código de seguimiento:",
@@ -238,7 +237,8 @@ function useGlobalForm() {
       token: token,
       payment_method_id: paymentDetails.tarjetaSeleccionada,
       bin: "450799",
-      amount: Math.round(total * 100),
+      // amount: Math.round(total * 100),
+      amount: 2900,
       currency: "ARS",
       site_id: "00270150",
       establishment_name: "Tienda Onfit",
@@ -311,17 +311,17 @@ function useGlobalForm() {
 
       const createOrderResponse = await axios.post("/api/orders", orderData);
 
-      if (createOrderResponse.data) { 
+      if (createOrderResponse.data) {
         const cargaCliente = await axios.post("/api/cargaclients", datosEnvio);
         cargaCliente.data && console.log("cliente cargado");
-console.log(cargaCliente)
+        console.log(cargaCliente);
         const response = await axios.put(
           `/api/orders?_id=${createOrderResponse.data._id}`,
           {
             codGestion: cargaCliente.data.codGestion,
           }
         );
-        console.log('response:',response)
+        console.log("response:", response);
         const stockUpdatePromises = products.map((item) =>
           axios.put("/api/product", {
             _id: item._id,
@@ -329,10 +329,10 @@ console.log(cargaCliente)
             stock: item.quantity,
           })
         );
-        await Promise.all(stockUpdatePromises)
+        await Promise.all(stockUpdatePromises);
 
         trackEvent("Purchase", {
-          content_ids: products.map(product => product._id), // Agrega los IDs de los productos
+          content_ids: products.map((product) => product._id), // Agrega los IDs de los productos
           content_type: "product",
           value: total, // Aquí agrega el valor total de la compra
           currency: "ARS",
@@ -352,9 +352,8 @@ console.log(cargaCliente)
 
   const submitGlobalForm = async () => {
     try {
-      // await generarToken();
-      await createOrder("123", "idtrasaction");
-
+      await generarToken();
+      // await createOrder("123", "idtrasaction");
       // console.log(shippingDetails, paymentDetails);
     } catch (error) {
       console.error(error);

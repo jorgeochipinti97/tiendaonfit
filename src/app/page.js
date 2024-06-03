@@ -19,7 +19,7 @@ export default function Home() {
           12 Cuotas sin interes y envio gratis a todo el país.
         </p>
       </div>
-      <p className="text-center fontg-geist mt-5 text-xl md:text-3xl font-bold">
+      <p className="text-center tracking-tighter mx-2 fontg-geist mt-5 text-xl md:text-3xl font-bold">
         Como si fuera poco, con tu compra te llevas un regalito de OnFit...
       </p>
 
@@ -43,7 +43,7 @@ export default function Home() {
       </div>
 
       <div>
-        <p className="font-geist font-bold text-4xl md:text-7xl  opacity-50 ml-5 mb-5 ">
+        <p className="font-geist tracking-tighter font-bold text-4xl md:text-7xl  opacity-50 ml-5 mb-5 ">
           Descubre nuestras Remeras Oversize
         </p>
         <ScrollArea className="  rounded-md border">
@@ -87,7 +87,7 @@ export default function Home() {
       </div>
 
       <div className="">
-        <p className="font-geist font-bold text-4xl md:text-7xl mb-5  opacity-50 ml-5 ">
+        <p className="font-geist tracking-tighter font-bold text-4xl md:text-7xl mb-5  opacity-50 ml-5 ">
           Nuestros buzos
         </p>
 
@@ -118,7 +118,7 @@ export default function Home() {
       <section className="mt-20">
         <div className="flex justify-start items-center w-screen flex-col">
           <div>
-            <p className="font-geist font-bold text-4xl md:text-7xl mb-5  opacity-50 mx-5 ">
+            <p className="font-geist font-bold tracking-tighter text-4xl md:text-7xl mb-5  opacity-50 mx-5 ">
               Se parte de la familia OnFit
             </p>
           </div>

@@ -68,8 +68,8 @@ const Page = () => {
                   </div>
                   <div>
                     <p className="text-center font-geist tracking-tighter font-bold mt-5 text-xl">
-                      Llevala en 3 cuotas sin interés de{" "}
-                      {formatCurrency(product.precioDescuento / 3)}
+                      Llevala en 12 cuotas sin interés de{" "}
+                      {formatCurrency(product.precioDescuento / 12)}
                     </p>
                   </div>
                 </div>
@@ -80,8 +80,8 @@ const Page = () => {
                       {formatCurrency(product.precio)}
                     </p>
                     <p className="text-center font-geist tracking-tighter mx-1 font-bold mt-5 text-xl">
-                      Llevala en 3 cuotas sin interés de{" "}
-                      {formatCurrency(product.precio / 3)}
+                      Llevala en 12 cuotas sin interés de{" "}
+                      {formatCurrency(product.precio / 12)}
                     </p>
                   </div>
                 </>

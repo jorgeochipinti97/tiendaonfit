@@ -31,7 +31,7 @@ const Page = () => {
     <div className="">
       <div className="flex justify-around">
         <p className="text-center  font-bold text-xl  tracking-tighter">
-          3 Cuotas sin interés{" "}
+          12 Cuotas sin interés{" "}
         </p>
         <p className="text-center  font-bold text-xl  tracking-tighter">
           Envio gratis a todo el país

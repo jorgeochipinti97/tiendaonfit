@@ -170,7 +170,7 @@ export default function RootLayout({ children }) {
 
         <div className="fixed bottom-0 bg-black/70 w-screen flex justify-center py-2 z-50">
           <p className="font-bold text-white text-center font-geist tracking-tighter text-md md:text-4xl">
-            Envio gratis a todo el país y 3 cuotas sin interés
+            Envio gratis a todo el país y 12 cuotas sin interés
           </p>
         </div>
         <Toaster />
