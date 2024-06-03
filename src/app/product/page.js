@@ -4,7 +4,9 @@ import EmblaCarousel from "@/components/ui/Sliders/Emblacarousel/Emblacarousel";
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
+
 import { useProduct } from "@/hooks/useProducts";
+
 import useStore from "@/lib/cart";
 import { formatCurrency } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -14,15 +16,15 @@ const Page = () => {
   const [size, setSize] = useState("");
   const { toast } = useToast();
   const { push } = useRouter();
-  const addToCart = useStore((state) => state.addToCart); // Obtén la acción 'addToCart' de la tienda
-
+  const addToCart = useStore((state) => state.addToCart);
   const searchParams = useSearchParams();
   const { products } = useProduct();
   const [product, setProduct] = useState();
+
   useEffect(() => {
     const _id = searchParams.get("_id");
-
     searchParams && console.log(_id);
+
     products &&
       searchParams &&
       setProduct(products.filter((e) => e._id == _id)[0]);
@@ -31,35 +33,20 @@ const Page = () => {
   const OPTIONS = { loop: true };
 
   useEffect(() => {
-    product &&
-      product.talles.map(
-        (e) => e.nombre == "M" && setSize(e.nombre)
-      );
+    product && product.talles.map((e) => e.nombre == "M" && setSize(e.nombre));
   }, [product]);
 
   const handleAddToCart = () => {
-    // if (product.talles.length > 0 && !size || product.categoria != 'indumentaria' ) {
-    //   alert("Por favor, selecciona un talle antes de añadir al carrito.");
-    //   return;
-    // }
-
     toast({
       title: "Producto agregado al carrito correctamente",
-      description: "OnFit te espera!",
-      action: (
-        <ToastAction asChild altText="Goto schedule to undo">
-          <Cart isToast={true} />
-        </ToastAction>
-      ),
+      description: "Completa tu compra",
     });
-
-    addToCart(product, 1, size); // Añade el producto al carrito
+    addToCart(product, 1, size);
   };
 
   return (
     <div>
-
-      <div className="pb-20">
+      <div className="pb-60">
         {product && (
           <div>
             <div className="m-5">
@@ -68,7 +55,7 @@ const Page = () => {
               </p>
             </div>
             <EmblaCarousel images={product.images} options={OPTIONS} />
-            <div className="mx-2">
+            <div className="mx-2 mt-10">
               {product.precioDescuento ? (
                 <div>
                   <div className="flex justify-center">
@@ -92,7 +79,7 @@ const Page = () => {
                     <p className="font-geist tracking-tighter font-bold text-5xl text-center">
                       {formatCurrency(product.precio)}
                     </p>
-                    <p className="text-center font-geist tracking-tighter font-bold mt-5 text-xl">
+                    <p className="text-center font-geist tracking-tighter mx-1 font-bold mt-5 text-xl">
                       Llevala en 3 cuotas sin interés de{" "}
                       {formatCurrency(product.precio / 3)}
                     </p>
@@ -116,10 +103,13 @@ const Page = () => {
               )}
             </div>
             <div className="flex justify-center  my-5">
-              <Button variant="outline" className="mx-5">
+              <Button
+
+                className="mx-5"
+                onClick={handleAddToCart}
+              >
                 Agregar al carrito
               </Button>
-              <Button className="mx-5">Comprar ahora</Button>
             </div>
 
             <div className=" flex justify-center ">

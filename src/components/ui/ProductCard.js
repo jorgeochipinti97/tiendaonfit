@@ -1,49 +1,29 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "./input";
+
 import useStore from "@/lib/cart";
 import { formatCurrency } from "@/lib/utils";
 import { useToast } from "./use-toast";
-import { ToastAction } from "@/components/ui/toast";
-import { Cart } from "../Cart";
 import { useRouter } from "next/navigation";
+import { PaymentForm } from "../forms/PaymentForm";
+import { AddressForm } from "../forms/AddressForm";
+import gsap from "gsap";
 
 export const ProductCard = ({ product }) => {
   const [size, setSize] = useState("");
   const { toast } = useToast();
   const { push } = useRouter();
-
-  const addToCart = useStore((state) => state.addToCart); // Obtén la acción 'addToCart' de la tienda
+  const addToCart = useStore((state) => state.addToCart);
 
   const handleAddToCart = () => {
-    // if (product.talles.length > 0 && !size || product.categoria != 'indumentaria' ) {
-    //   alert("Por favor, selecciona un talle antes de añadir al carrito.");
-    //   return;
-    // }
-
     toast({
       title: "Producto agregado al carrito correctamente",
-      description: "OnFit te espera!",
-      action: (
-        <ToastAction asChild altText="Goto schedule to undo">
-          <Cart isToast={true} />
-        </ToastAction>
-      ),
+      description: "Completa tu compra",
     });
-
-    addToCart(product, 1, size); // Añade el producto al carrito
+    addToCart(product, 1, size);
   };
 
   useEffect(() => {
@@ -52,20 +32,20 @@ export const ProductCard = ({ product }) => {
         (e) => e.nombre.toLowerCase() == "m" && setSize(e.nombre)
       );
   }, []);
+
+
   return (
     <div className="flex justify-center  m-2">
       <div className="w-[300px] md:w-[400px] ">
         <div className="flex flex-col bg-black items-center justify-center rounded-xl  ">
           <Card className="  bg-transparent w-10/12 border-none">
-            <CardTitle className=" text-center text-white py-5  ">
-
-                {product.titulo}
-
+            <CardTitle className=" font-geist text-center text-xl text-white py-5  ">
+              {product.titulo}
             </CardTitle>
             <CardContent
               className="h-[300px] md:h-[400px]  rounded-xl flex flex-col justify-end"
               style={{
-                backgroundImage: `url(${product.images[0]})`,
+                backgroundImage: `url(https://d2hh41w9oz00ab.cloudfront.net/${product.images[0]})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
@@ -92,12 +72,12 @@ export const ProductCard = ({ product }) => {
             </CardContent>
           </Card>
           <div className="pb-10">
-            <p className="text-white font-geist font-semibold tracking-tighter mt-2 text-center">
-              Es tuya por 3 cuotas de{" "}
+            <p className="text-white font-geist font-semibold text-md tracking-tighter mt-2 text-center">
+Llevalo por 12 cuotas de{" "}
               {formatCurrency(
                 product.precioDescuento
-                  ? product.precioDescuento / 3
-                  : product.precio / 3
+                  ? product.precioDescuento / 12
+                  : product.precio / 12
               )}
             </p>
             <div className="flex justify-center">
@@ -122,35 +102,31 @@ export const ProductCard = ({ product }) => {
                   </Button>
                 )
             )}
-            <div className="flex w-full mt-5 justify-around  ">
-              <Dialog>
+            <div className="flex w-full mt-5 justify-start  ">
+            {/* <Dialog className="">
                 <DialogTrigger asChild>
                   <Button className=" font-geist mx-1  tracking-tighter">
                     Comprar ahora
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="">
+                <DialogContent className="" ref={dialogFormRef}>
                   <DialogHeader>
                     <DialogTitle>Formulario de envío</DialogTitle>
                     <DialogDescription>
-                      <form>
-                        <Input placeholder="Nombre" className="my-1" />
-                        <Input placeholder="Apellido" className="my-1" />
-                        <Input placeholder="Dirección" className="my-1" />
-                        <Input placeholder="Número" className="my-1" />
-                        <Input placeholder="Código postal" className="my-1" />
-                        <Input placeholder="Localidad" className="my-1" />
-                        <Input placeholder="Ciudad" className="my-1" />
-                        <Input placeholder="Provincia" className="my-1" />
-                        <Input placeholder="Celular" className="my-1" />
-                        <div className="mt-5">
-                          <Button type="submit">Enviar</Button>
-                        </div>
-                      </form>
+                      <div className="address" ref={addressFormRef}>
+                        <AddressForm handleNext={handleNext} />
+                      </div>
+                      <div
+                        className="payment"
+                        style={{ display: "none", opacity: 0 }}
+                        ref={paymentFormRef}
+                      >
+                        <PaymentForm />
+                      </div>
                     </DialogDescription>
                   </DialogHeader>
                 </DialogContent>
-              </Dialog>
+              </Dialog> */}
               <Button
                 className=" font-geist mx-1  tracking-tighter"
                 variant="outline"

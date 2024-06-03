@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -24,7 +24,7 @@ import { Button } from "../ui/button";
 
 import { formatCurrency } from "@/lib/utils";
 import useStore from "@/lib/cart";
-// import { CheckoutForm } from "../Forms/CheckoutForm";
+import { CheckoutForm } from "../forms/CheckoutForm";
 
 export const Cart = ({ isToast }) => {
   const products = useStore((state) => state.getProducts()); // Usar el selector para obtener los productos
@@ -34,6 +34,7 @@ export const Cart = ({ isToast }) => {
   const removerProducto = useStore((state) => state.removeFromCart);
 
   const decrementarCantidad = useStore((state) => state.decreaseQuantity);
+
   return (
     <AlertDialog className="z-50">
       <AlertDialogTrigger asChild>
@@ -73,12 +74,12 @@ export const Cart = ({ isToast }) => {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Carrito</AlertDialogTitle>
-          <AlertDialogDescription>
-            <div className="flex justify-center">
-              <Table className="w-10/12">
+          <AlertDialogDescription className=''>
+            <div className="flex justify-center w-full">
+              <Table className="w-12/12">
                 <TableHeader>
                   <TableRow>
-                    <TableHead>Nombre</TableHead>
+                    <TableHead >-</TableHead>
                     <TableHead>Precio</TableHead>
                     <TableHead>Cantidad</TableHead>
                     <TableHead className="">Acciones</TableHead>
@@ -100,7 +101,7 @@ export const Cart = ({ isToast }) => {
                         <div className="flex">
                           <Button
                             variant="outline"
-                            className="mx-1"
+                            className=""
                             onClick={() =>
                               incrementarCantidad(producto._id, producto.size)
                             }
@@ -109,7 +110,7 @@ export const Cart = ({ isToast }) => {
                           </Button>
                           <Button
                             variant="outline"
-                            className="mx-1"
+                            className=""
                             onClick={() =>
                               decrementarCantidad(producto._id, producto.size)
                             }
@@ -140,8 +141,10 @@ export const Cart = ({ isToast }) => {
                 </span>
               </p>
             </div>
+            <div className="flex justify-start">
+            <CheckoutForm />
+            </div>
           </AlertDialogDescription>
-          {/* <CheckoutForm total={total} products={products} /> */}
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>

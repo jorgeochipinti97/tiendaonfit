@@ -14,7 +14,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export const Navbar = () => {
-  const [activeImage, setActiveImage] = React.useState("/index.png");
+  const [activeImage, setActiveImage] = React.useState("/hotsale.png");
 
   const handleMouseEnter = (imageSrc) => {
     setActiveImage(imageSrc);
@@ -62,9 +62,9 @@ export const Navbar = () => {
                     "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714157906/OnFit6235_jc3kdi.webp"
                   )
                 }
-                onMouseLeave={() => handleMouseEnter("/index.png")}
+                onMouseLeave={() => handleMouseEnter("/hotsale.png")}
               >
-                Re-usable components built using Radix UI and Tailwind CSS.
+    Encuentra la mejor indumentaria deportiva para todas tus actividades. Desde ropa para entrenamiento hasta atuendos casuales para el día a día.
               </ListItem>
               <ListItem
                 href="/products?categoria=accesorios"
@@ -74,9 +74,9 @@ export const Navbar = () => {
                     "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714158023/OnFitII1671_fg8gce.jpg"
                   )
                 }
-                onMouseLeave={() => handleMouseEnter("/index.png")}
+                onMouseLeave={() => handleMouseEnter("/hotsale.png")}
               >
-                How to install dependencies and structure your app.
+    Descubre una amplia gama de accesorios para complementar tu estilo de vida fitness. Desde guantes y bandas hasta botellas y mochilas.
               </ListItem>
               <ListItem
                 href="/products?categoria=equipamiento"
@@ -86,9 +86,9 @@ export const Navbar = () => {
                     "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714158681/CINTA_NORDIkA_840_uvona9.webp"
                   )
                 }
-                onMouseLeave={() => handleMouseEnter("/index.png")}
+                onMouseLeave={() => handleMouseEnter("/hotsale.png")}
               >
-                Styles for headings, paragraphs, lists...etc
+    Encuentra el equipamiento necesario para tu gimnasio en casa o para mejorar tus entrenamientos. Pesas, cintas de correr y más.
               </ListItem>
             </ul>
           </NavigationMenuContent>

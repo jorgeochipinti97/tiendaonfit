@@ -4,6 +4,33 @@ import { devtools } from "zustand/middleware";
 const useStore = create(
   devtools((set, get) => ({
     cart: [],
+    shippingDetails: {
+      firstName: "",
+      lastName: "",
+      idNumber: "",
+      email: "",
+      address: "",
+      addressNumber: "",
+      piso: "",
+      city: "",
+      localidad: "",
+      provincia: "",
+      mobile: "",
+      postalCode: "",
+      deliveryNote: "",
+    },
+    paymentDetails: {
+      tarjetaSeleccionada: "",
+      numeroTarjeta: "",
+      mesExpiracion: "",
+      anioExpiracion: "",
+      codigoSeguridad: "",
+      nombreTitular: "",
+      tipoIdentificacion: "",
+      numeroIdentificacion: "",
+      cuotas: 1,
+      discountCode: {},
+    },
     addToCart: (product, quantity = 1, size = null) =>
       set((state) => {
         const existingProduct = state.cart.find(
@@ -47,7 +74,7 @@ const useStore = create(
     getTotal: () => {
       const cart = get().cart;
       return cart.reduce((total, item) => {
-        const price_ = item.discountPrice || item.price;
+        const price_ = item.precioDescuento || item.precio;
         return total + price_ * item.quantity;
       }, 0);
     },
@@ -55,7 +82,44 @@ const useStore = create(
     getTotalItems: () => {
       const cart = get().cart;
       return cart.reduce((total, item) => total + item.quantity, 0);
-    } 
+    },
+    updateShippingDetails: (newData) => set((state) => ({
+      shippingDetails: { ...state.shippingDetails, ...newData }
+    })),
+    updatePaymentDetails: (newData) => set((state) => ({
+      paymentDetails: { ...state.paymentDetails, ...newData }
+    })),
+    resetFormData: () => set(() => ({
+      shippingDetails: {
+        firstName: "",
+        lastName: "",
+        idNumber: "",
+        email: "",
+        address: "",
+        addressNumber: "",
+        piso: "",
+        city: "",
+        localidad: "",
+        provincia: "",
+        mobile: "",
+        postalCode: "",
+        deliveryNote: "",
+        idNumber:''
+      },
+      paymentDetails: {
+        tarjetaSeleccionada: "",
+        numeroTarjeta: "",
+        mesExpiracion: "",
+        anioExpiracion: "",
+        codigoSeguridad: "",
+        nombreTitular: "",
+        tipoIdentificacion: "",
+        numeroIdentificacion: "",
+        totalPesos: 0,
+        cuotas: 1,
+        discountCode: {},
+      }
+    })),
   }))
 );
 

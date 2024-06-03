@@ -17,3 +17,4 @@ export const formatCurrency = (value) => {
 
   return formatter.format(value); //$2,500.00
 };
+
