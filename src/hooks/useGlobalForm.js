@@ -167,7 +167,9 @@ function useGlobalForm() {
   const obtenerSiguienteCodigoDeSeguimiento = async () => {
     try {
       const response = await axios.post("/api/trackid");
+      console.log(response)
       return response.data.codGestion;
+
     } catch (error) {
       console.error(
         "Error al obtener el siguiente código de seguimiento:",
@@ -279,10 +281,13 @@ function useGlobalForm() {
   };
 
   const createOrder = async (token, transactionId) => {
+    if (!products || !total || !shippingDetails || !paymentDetails) {
+      throw new Error("Faltan datos necesarios para crear la orden.");
+    }
     try {
       const orderData = {
         orderItems: products, // Reemplaza con los datos reales
-        numberOfItems: products ? products.lenght : 0, // Reemplaza con los datos reales
+        numberOfItems: products ? products.length : 0, // Reemplaza con los datos reales
         total: total, // Reemplaza con los datos reales
         transactionId: transactionId,
         token: token,
@@ -297,21 +302,26 @@ function useGlobalForm() {
         phone: shippingDetails.mobile,
         dniTitular: `${shippingDetails.idNumber}`,
         postalCode: shippingDetails.postalCode,
-        discountPrice: 0, 
+        discountPrice: 0,
         cuotas: `${paymentDetails.cuotas}`,
         discountCode: paymentDetails.discountCode
-          ? paymentDetails.discountCode
+          ? `${paymentDetails.discountCode}`
           : "-",
       };
 
       const createOrderResponse = await axios.post("/api/orders", orderData);
 
-      if (createOrderResponse.data) {
-        // Actualizar el stock de los productos
-        // Redirigir a la página de órdenes
-        push(`/orders/${createOrderResponse.data._id}`);
-        await axios.post("/api/cargaclients", datosEnvio);
-
+      if (createOrderResponse.data) { 
+        const cargaCliente = await axios.post("/api/cargaclients", datosEnvio);
+        cargaCliente.data && console.log("cliente cargado");
+console.log(cargaCliente)
+        const response = await axios.put(
+          `/api/orders?_id=${createOrderResponse.data._id}`,
+          {
+            codGestion: cargaCliente.data.codGestion,
+          }
+        );
+        console.log('response:',response)
         const stockUpdatePromises = products.map((item) =>
           axios.put("/api/product", {
             _id: item._id,
@@ -319,15 +329,16 @@ function useGlobalForm() {
             stock: item.quantity,
           })
         );
-
-        await Promise.all(stockUpdatePromises);
+        await Promise.all(stockUpdatePromises)
 
         trackEvent("Purchase", {
-          content_ids: [], // Aquí agrega los IDs de los productos
+          content_ids: products.map(product => product._id), // Agrega los IDs de los productos
           content_type: "product",
           value: total, // Aquí agrega el valor total de la compra
           currency: "ARS",
         });
+
+        // response && push(`/orders/${createOrderResponse.data._id}`);
       }
     } catch (error) {
       console.error(error);
@@ -342,9 +353,9 @@ function useGlobalForm() {
   const submitGlobalForm = async () => {
     try {
       // await generarToken();
-      // await createOrder("123", "idtrasaction");
+      await createOrder("123", "idtrasaction");
 
-      console.log(shippingDetails, paymentDetails);
+      // console.log(shippingDetails, paymentDetails);
     } catch (error) {
       console.error(error);
       toast({

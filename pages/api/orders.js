@@ -33,7 +33,7 @@ const createOrder = async (req, res) => {
 };
 
 const getOrders = async (req, res) => {
-  await db.connectDB();
+  await connectDB();
   const { _id } = req.query; // Extrae el _id de la query si existe
 
   try {
@@ -58,7 +58,7 @@ const getOrders = async (req, res) => {
 };
 
 const updateOrder = async (req, res) => {
-  await db.connectDB();
+  await connectDB();
   try {
     const { _id } = req.query; // Asume que el ID de la orden viene en la query de la URL
     const orderToUpdate = await OrderOnfit.findById(_id);
@@ -67,9 +67,11 @@ const updateOrder = async (req, res) => {
 
       return res.status(404).json({ message: "Order not found" });
     }
+    const updateData = { ...req.body };
 
-    const updatedOrder = await OrderOnfit.findByIdAndUpdate(_id, {
-      ...req.body,
+    const updatedOrder = await OrderOnfit.findByIdAndUpdate(_id, updateData, {
+      new: true, // Devolver el documento actualizado
+      runValidators: true, // Ejecutar validaciones en el esquema
     });
 
 

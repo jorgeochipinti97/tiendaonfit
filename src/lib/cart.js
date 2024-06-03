@@ -29,17 +29,17 @@ const useStore = create(
       tipoIdentificacion: "",
       numeroIdentificacion: "",
       cuotas: 1,
-      discountCode: {},
+      discountCode: '-',
     },
     addToCart: (product, quantity = 1, size = null) =>
       set((state) => {
         const existingProduct = state.cart.find(
-          (item) => item.id === product._id && item.size === size
+          (item) => item._id === product._id && item.size === size
         );
         if (existingProduct) {
           return {
             cart: state.cart.map((item) =>
-              item.id === product._id && item.size === size
+              item._id === product._id && item.size === size
                 ? { ...item, quantity: item.quantity + quantity }
                 : item
             ),
