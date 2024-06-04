@@ -129,7 +129,7 @@ Llevalo por 12 cuotas de{" "}
               </Dialog> */}
               <Button
                 className=" font-geist mx-1  tracking-tighter"
-                variant="outline"
+
                 onClick={handleAddToCart}
               >
                 Agregar al carrito

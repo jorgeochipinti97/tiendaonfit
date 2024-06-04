@@ -149,9 +149,14 @@ export const PaymentForm = () => {
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  {[1, 3, 6, 12].map((cuota) => (
-                    <SelectItem value={cuota.toString()} key={cuota}>
-                      {cuota} cuotas sin interés
+                  {[
+                    { cuota: 1, valor: 1 },
+                    { cuota: 3, valor: 13 },
+                    { cuota: 6, valor: 16 },
+                    { cuota: 12, valor: 7 },
+                  ].map((e) => (
+                    <SelectItem value={e.valor.toString()} key={e.cuota}>
+                      {e.cuota} cuotas sin interés
                     </SelectItem>
                   ))}
                 </SelectGroup>

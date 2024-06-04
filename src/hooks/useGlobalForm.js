@@ -209,11 +209,8 @@ function useGlobalForm() {
 
       if (response.data) {
         await getPayment(response.data.id);
-        toast({
-          title: "Éxito",
-          description: "Token generado con éxito.",
-        });
       }
+
     } catch (error) {
       console.error(error);
       toast({
@@ -352,9 +349,9 @@ function useGlobalForm() {
 
   const submitGlobalForm = async () => {
     try {
-      await generarToken();
+      // await generarToken();
       // await createOrder("123", "idtrasaction");
-      // console.log(shippingDetails, paymentDetails);
+      console.log(shippingDetails, paymentDetails);
     } catch (error) {
       console.error(error);
       toast({
