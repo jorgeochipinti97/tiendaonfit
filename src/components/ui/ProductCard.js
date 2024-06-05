@@ -135,7 +135,7 @@ export const ProductCard = ({ product }) => {
                   Agregar al carrito
                 </Button>
               ) : (
-                <Button  onClick={push(enlaceWaLink_)}>Consultar ahora</Button>
+                <Button onClick={()=>push(enlaceWaLink_)}>Consultar ahora</Button>
               )}
             </div>
           </div>
