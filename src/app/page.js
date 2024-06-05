@@ -5,9 +5,11 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 import { useProduct } from "@/hooks/useProducts";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const { products } = useProduct();
+  const { push } = useRouter();
 
   return (
     <div style={{ backgroundSize: "cover" }} className="h-fit  bg-white pb-56">
@@ -140,7 +142,13 @@ export default function Home() {
           />
         </div>
         <div className="flex justify-center mt-5">
-          <Button  size='lg'> Ver productos </Button>
+          <Button
+            onClick={() => push("/products?categoria=indumentaria")}
+            size="lg"
+          >
+            {" "}
+            Ver productos{" "}
+          </Button>
         </div>
       </section>
     </div>
