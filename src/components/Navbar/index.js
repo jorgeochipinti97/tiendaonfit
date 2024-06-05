@@ -21,7 +21,7 @@ export const Navbar = () => {
   };
 
   return (
-    <NavigationMenu className=''>
+    <NavigationMenu className="">
       <NavigationMenuList>
         <NavigationMenuItem>
           <img src="/logo.png" className="w-[100px] ml-5" />
@@ -46,10 +46,7 @@ export const Navbar = () => {
                     href="/"
                   >
                     <div className="mb-2 mt-4 text-lg font-medium">
-                      <img
-                        src={activeImage}
-                        className="h-[300px] rounded-xl"
-                      />
+                      <img src={activeImage} className="h-[300px] rounded-xl" />
                     </div>
                   </a>
                 </NavigationMenuLink>
@@ -59,36 +56,41 @@ export const Navbar = () => {
                 title="Indumentaria"
                 onMouseEnter={() =>
                   handleMouseEnter(
-                    "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714157906/OnFit6235_jc3kdi.webp"
+                    "https://d2hh41w9oz00ab.cloudfront.net/TIENDA+ONFIT/Buzos/Galaxy/11zon_converted/OnFit5334_2_11zon.webp"
                   )
                 }
                 onMouseLeave={() => handleMouseEnter("/hotsale.png")}
               >
-    Encuentra la mejor indumentaria deportiva para todas tus actividades. Desde ropa para entrenamiento hasta atuendos casuales para el día a día.
+                Encuentra la mejor indumentaria deportiva para todas tus
+                actividades. Desde ropa para entrenamiento hasta atuendos
+                casuales para el día a día.
               </ListItem>
               <ListItem
                 href="/products?categoria=accesorios"
                 title="Accesorios"
                 onMouseEnter={() =>
                   handleMouseEnter(
-                    "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714158023/OnFitII1671_fg8gce.jpg"
+                    "https://d2hh41w9oz00ab.cloudfront.net/TIENDA+ONFIT/guantes/OnFitII1671.jpg"
                   )
                 }
                 onMouseLeave={() => handleMouseEnter("/hotsale.png")}
               >
-    Descubre una amplia gama de accesorios para complementar tu estilo de vida fitness. Desde guantes y bandas hasta botellas y mochilas.
+                Descubre una amplia gama de accesorios para complementar tu
+                estilo de vida fitness. Desde guantes y bandas hasta botellas y
+                mochilas.
               </ListItem>
               <ListItem
                 href="/products?categoria=equipamiento"
                 title="Equipamiento"
                 onMouseEnter={() =>
                   handleMouseEnter(
-                    "https://res.cloudinary.com/dwtnrs4ix/image/upload/v1714158681/CINTA_NORDIkA_840_uvona9.webp"
+                    "https://d2hh41w9oz00ab.cloudfront.net/TIENDA+ONFIT/BICICLETA+INDOOR+NORDIKA+2.0+(1).webp"
                   )
                 }
                 onMouseLeave={() => handleMouseEnter("/hotsale.png")}
               >
-    Encuentra el equipamiento necesario para tu gimnasio en casa o para mejorar tus entrenamientos. Pesas, cintas de correr y más.
+                Encuentra el equipamiento necesario para tu gimnasio en casa o
+                para mejorar tus entrenamientos. Pesas, cintas de correr y más.
               </ListItem>
             </ul>
           </NavigationMenuContent>
