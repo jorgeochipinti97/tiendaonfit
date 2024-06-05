@@ -349,9 +349,9 @@ function useGlobalForm() {
 
   const submitGlobalForm = async () => {
     try {
-      // await generarToken();
+      await generarToken();
       // await createOrder("123", "idtrasaction");
-      console.log(shippingDetails, paymentDetails);
+      // console.log(shippingDetails, paymentDetails);
     } catch (error) {
       console.error(error);
       toast({
