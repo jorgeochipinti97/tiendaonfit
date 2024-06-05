@@ -107,7 +107,7 @@ export default function Home() {
       </div>
       <div className="flex justify-around my-10 rounded-xl   md:hidden">
         <video
-          src="/buzos.mov"
+          src="https://royer-bucket.s3.sa-east-1.amazonaws.com/buzos.MOV"
           loop
           playsInline
           autoPlay
