@@ -49,7 +49,7 @@ export const CheckoutForm = () => {
         </DialogTrigger>
         <DialogContent className="" ref={dialogFormRef}>
           <DialogHeader>
-            <DialogTitle>Formulario de envío</DialogTitle>
+            <DialogTitle>Formulario de compra</DialogTitle>
             <DialogDescription>
               <div className="address" ref={addressFormRef}>
                 <AddressForm handleNext={handleNext} />

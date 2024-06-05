@@ -103,30 +103,7 @@ export const ProductCard = ({ product }) => {
                 )
             )}
             <div className="flex w-full mt-5 justify-start  ">
-              {/* <Dialog className="">
-                <DialogTrigger asChild>
-                  <Button className=" font-geist mx-1  tracking-tighter">
-                    Comprar ahora
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="" ref={dialogFormRef}>
-                  <DialogHeader>
-                    <DialogTitle>Formulario de envío</DialogTitle>
-                    <DialogDescription>
-                      <div className="address" ref={addressFormRef}>
-                        <AddressForm handleNext={handleNext} />
-                      </div>
-                      <div
-                        className="payment"
-                        style={{ display: "none", opacity: 0 }}
-                        ref={paymentFormRef}
-                      >
-                        <PaymentForm />
-                      </div>
-                    </DialogDescription>
-                  </DialogHeader>
-                </DialogContent>
-              </Dialog> */}
+
               {product.categoria != "equipamiento" ? (
                 <Button
                   className=" font-geist mx-1  tracking-tighter"
