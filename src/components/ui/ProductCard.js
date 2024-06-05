@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
 
-
 import useStore from "@/lib/cart";
 import { formatCurrency } from "@/lib/utils";
 import { useToast } from "./use-toast";
@@ -32,8 +31,9 @@ export const ProductCard = ({ product }) => {
         (e) => e.nombre.toLowerCase() == "m" && setSize(e.nombre)
       );
   }, []);
-
-
+  const mensaje = `Hola! te consulto por ${product.titulo}`;
+  const mensajeUrlEncoded_ = encodeURIComponent(mensaje);
+  const enlaceWaLink_ = `https://wa.me/5491132856744?text=${mensajeUrlEncoded_}`;
   return (
     <div className="flex justify-center  m-2">
       <div className="w-[300px] md:w-[400px] ">
@@ -73,7 +73,7 @@ export const ProductCard = ({ product }) => {
           </Card>
           <div className="pb-10">
             <p className="text-white font-geist font-semibold text-md tracking-tighter mt-2 text-center">
-Llevalo por 12 cuotas de{" "}
+              Llevalo por 12 cuotas de{" "}
               {formatCurrency(
                 product.precioDescuento
                   ? product.precioDescuento / 12
@@ -103,7 +103,7 @@ Llevalo por 12 cuotas de{" "}
                 )
             )}
             <div className="flex w-full mt-5 justify-start  ">
-            {/* <Dialog className="">
+              {/* <Dialog className="">
                 <DialogTrigger asChild>
                   <Button className=" font-geist mx-1  tracking-tighter">
                     Comprar ahora
@@ -127,17 +127,21 @@ Llevalo por 12 cuotas de{" "}
                   </DialogHeader>
                 </DialogContent>
               </Dialog> */}
-              <Button
-                className=" font-geist mx-1  tracking-tighter"
-
-                onClick={handleAddToCart}
-              >
-                Agregar al carrito
-              </Button>
+              {product.categoria != "equipamiento" ? (
+                <Button
+                  className=" font-geist mx-1  tracking-tighter"
+                  onClick={handleAddToCart}
+                >
+                  Agregar al carrito
+                </Button>
+              ) : (
+                <Button  onClick={push(enlaceWaLink_)}>Consultar ahora</Button>
+              )}
             </div>
           </div>
         </div>
       </div>
     </div>
+    // 5491132856744
   );
 };

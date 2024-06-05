@@ -16,6 +16,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+      <head>
+        <link
+          rel="icon"
+          href="https://www.tiendaonfit.com.ar/favicon.ico"
+          type="image/x-icon"
+        />
+      </head>
       <body className={inter.className}>
         <Navbar />
         <div className="fixed bottom-20 z-50 right-2">

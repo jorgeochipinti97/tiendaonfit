@@ -15,7 +15,6 @@ import React, { useEffect, useState } from "react";
 const Page = () => {
   const [size, setSize] = useState("");
   const { toast } = useToast();
-  const { push } = useRouter();
   const addToCart = useStore((state) => state.addToCart);
   const searchParams = useSearchParams();
   const { products } = useProduct();
@@ -54,7 +53,13 @@ const Page = () => {
                 {product.titulo}
               </p>
             </div>
-            <EmblaCarousel images={product.images} options={OPTIONS} />
+            {product.images.length == 1 ? (
+              <>
+                <img src={product.images[0]} alt=""/>
+              </>
+            ) : (
+              <EmblaCarousel images={product.images} options={OPTIONS} />
+            )}
             <div className="mx-2 mt-10">
               {product.precioDescuento ? (
                 <div>
@@ -103,11 +108,7 @@ const Page = () => {
               )}
             </div>
             <div className="flex justify-center  my-5">
-              <Button
-
-                className="mx-5"
-                onClick={handleAddToCart}
-              >
+              <Button className="mx-5" onClick={handleAddToCart}>
                 Agregar al carrito
               </Button>
             </div>
