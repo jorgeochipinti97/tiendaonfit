@@ -55,7 +55,10 @@ const Page = () => {
             </div>
             {product.images.length == 1 ? (
               <>
-                <img src={`https://d2hh41w9oz00ab.cloudfront.net/${product.images[0]}`} alt=""/>
+                <img
+                  src={`https://d2hh41w9oz00ab.cloudfront.net/${product.images[0]}`}
+                  alt=""
+                />
               </>
             ) : (
               <EmblaCarousel images={product.images} options={OPTIONS} />
@@ -92,21 +95,24 @@ const Page = () => {
                 </>
               )}
             </div>
-            <div className="flex justify-center mt-5">
-              {product.talles.map(
-                (t, index) =>
-                  t.stock > 0 && (
-                    <Button
-                      key={index}
-                      variant={size == t.nombre ? "" : "outline"}
-                      className="font-mono uppercase mx-1 border-black"
-                      onClick={() => setSize(t.nombre)}
-                    >
-                      {t.nombre}
-                    </Button>
-                  )
-              )}
-            </div>
+            {(product.categoria != "accesorios") &
+            (
+              <div className="flex justify-center mt-5">
+                {product.talles.map(
+                  (t, index) =>
+                    t.stock > 0 && (
+                      <Button
+                        key={index}
+                        variant={size == t.nombre ? "" : "outline"}
+                        className="font-mono uppercase mx-1 border-black"
+                        onClick={() => setSize(t.nombre)}
+                      >
+                        {t.nombre}
+                      </Button>
+                    )
+                )}
+              </div>
+            )}
             <div className="flex justify-center  my-5">
               <Button className="mx-5" onClick={handleAddToCart}>
                 Agregar al carrito

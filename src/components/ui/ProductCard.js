@@ -89,21 +89,26 @@ export const ProductCard = ({ product }) => {
                 Ver producto
               </Button>
             </div>
-            {product.talles.map(
-              (t, index) =>
-                t.stock > 0 && (
-                  <Button
-                    key={index}
-                    variant={size == t.nombre ? "" : "outline"}
-                    className="font-mono uppercase mx-1"
-                    onClick={() => setSize(t.nombre)}
-                  >
-                    {t.nombre}
-                  </Button>
-                )
+            {(product.categoria != "accesorios") &&
+            (
+              <div className="flex justify-center mt-5">
+                {product.talles.map(
+                  (t, index) =>
+                    t.stock > 0 && (
+                      <Button
+                        key={index}
+                        variant={size == t.nombre ? "" : "outline"}
+                        className="font-mono uppercase mx-1"
+                        onClick={() => setSize(t.nombre)}
+                      >
+                        {t.nombre}
+                      </Button>
+                    )
+                )}
+              </div>
             )}
-            <div className="flex w-full mt-5 justify-start  ">
 
+            <div className="flex w-full mt-5 justify-start  ">
               {product.categoria != "equipamiento" ? (
                 <Button
                   className=" font-geist mx-1  tracking-tighter"
@@ -112,7 +117,9 @@ export const ProductCard = ({ product }) => {
                   Agregar al carrito
                 </Button>
               ) : (
-                <Button onClick={()=>push(enlaceWaLink_)}>Consultar ahora</Button>
+                <Button onClick={() => push(enlaceWaLink_)}>
+                  Consultar ahora
+                </Button>
               )}
             </div>
           </div>
