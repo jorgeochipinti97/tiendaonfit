@@ -6,7 +6,15 @@ import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 
 import { useProduct } from "@/hooks/useProducts";
-
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import useStore from "@/lib/cart";
 import { formatCurrency } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -19,6 +27,7 @@ const Page = () => {
   const searchParams = useSearchParams();
   const { products } = useProduct();
   const [product, setProduct] = useState();
+  const [imgSize, setImgSize] = useState("");
 
   useEffect(() => {
     const _id = searchParams.get("_id");
@@ -33,6 +42,17 @@ const Page = () => {
 
   useEffect(() => {
     product && product.talles.map((e) => e.nombre == "M" && setSize(e.nombre));
+
+    if (product) {
+      const tituloLower = product.titulo.toLowerCase();
+      if (tituloLower.includes("remera") || tituloLower.includes("musculosa")) {
+        setImgSize("/tablaremeras.jpg");
+      } else if (tituloLower.includes("short")) {
+        setImgSize("/tablashort.jpg");
+      } else if (tituloLower.includes("buzo")) {
+        setImgSize("/tablabuzos.jpg");
+      }
+    }
   }, [product]);
 
   const handleAddToCart = () => {
@@ -54,12 +74,13 @@ const Page = () => {
               </p>
             </div>
             {product.images.length == 1 ? (
-              <>
+              <div className="flex justify-center">
                 <img
                   src={`https://d2hh41w9oz00ab.cloudfront.net/${product.images[0]}`}
                   alt=""
+                  className="h-[80vh] rounded-xl"
                 />
-              </>
+              </div>
             ) : (
               <EmblaCarousel images={product.images} options={OPTIONS} />
             )}
@@ -95,8 +116,22 @@ const Page = () => {
                 </>
               )}
             </div>
-            {(product.categoria != "accesorios") &&
-            (
+            <div className="flex justify-center my-5"> 
+            <Dialog>
+
+              <DialogTrigger asChild>
+                <Button variant="outline">Ver guía de talles</Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Guia de talles</DialogTitle>
+                </DialogHeader>
+                <img src={imgSize}  alt=""/>
+              </DialogContent>
+            </Dialog>
+
+            </div>
+            {product.categoria != "accesorios" && (
               <div className="flex justify-center mt-5">
                 {product.talles.map(
                   (t, index) =>
