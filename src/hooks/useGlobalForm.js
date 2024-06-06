@@ -167,7 +167,7 @@ function useGlobalForm() {
   const obtenerSiguienteCodigoDeSeguimiento = async () => {
     try {
       const response = await axios.post("/api/trackid");
-      console.log(response);
+      // console.log(response);
       return response.data.codGestion;
     } catch (error) {
       console.error(
@@ -210,7 +210,6 @@ function useGlobalForm() {
       if (response.data) {
         await getPayment(response.data.id);
       }
-
     } catch (error) {
       console.error(error);
       toast({
@@ -283,9 +282,18 @@ function useGlobalForm() {
     }
     try {
       const orderData = {
-        orderItems: products, // Reemplaza con los datos reales
-        numberOfItems: products ? products.length : 0, // Reemplaza con los datos reales
-        total: total, // Reemplaza con los datos reales
+        orderItems: products.map((e) => {
+          return {
+            _id: e._id,
+            title: e.titulo,
+            price: e.precio,
+            images: e.images[0], 
+            sku: obtenerSkuPorIdYTalle(e._id, e.size), 
+            quantity: e.quantity,
+          };
+        }),
+        numberOfItems: products ? products.length : 0, 
+        total: total, 
         transactionId: transactionId,
         token: token,
         titular: `${shippingDetails.firstName} ${shippingDetails.lastName}`,
@@ -310,15 +318,13 @@ function useGlobalForm() {
 
       if (createOrderResponse.data) {
         const cargaCliente = await axios.post("/api/cargaclients", datosEnvio);
-        cargaCliente.data && console.log("cliente cargado");
-        console.log(cargaCliente);
         const response = await axios.put(
           `/api/orders?_id=${createOrderResponse.data._id}`,
           {
             codGestion: cargaCliente.data.codGestion,
           }
         );
-        console.log("response:", response);
+
         const stockUpdatePromises = products.map((item) =>
           axios.put("/api/product", {
             _id: item._id,
@@ -326,6 +332,7 @@ function useGlobalForm() {
             stock: item.quantity,
           })
         );
+
         await Promise.all(stockUpdatePromises);
 
         trackEvent("Purchase", {
@@ -350,7 +357,7 @@ function useGlobalForm() {
   const submitGlobalForm = async () => {
     try {
       await generarToken();
-
+      // console.log(products);
     } catch (error) {
       console.error(error);
       toast({
@@ -372,3 +379,5 @@ function useGlobalForm() {
 }
 
 export default useGlobalForm;
+{
+}
