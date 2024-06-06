@@ -95,7 +95,7 @@ const Page = () => {
                 </>
               )}
             </div>
-            {(product.categoria != "accesorios") &
+            {(product.categoria != "accesorios") &&
             (
               <div className="flex justify-center mt-5">
                 {product.talles.map(
