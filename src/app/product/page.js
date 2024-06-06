@@ -55,7 +55,7 @@ const Page = () => {
             </div>
             {product.images.length == 1 ? (
               <>
-                <img src={product.images[0]} alt=""/>
+                <img src={`https://d2hh41w9oz00ab.cloudfront.net/${product.images[0]}`} alt=""/>
               </>
             ) : (
               <EmblaCarousel images={product.images} options={OPTIONS} />
