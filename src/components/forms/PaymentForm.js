@@ -40,7 +40,7 @@ export const PaymentForm = () => {
     { name: "Cabal Débito", value: 108 },
     { name: "Cabal Crédito", value: 63 },
   ];
-
+  const [isSubmit, setIsSubmit] = useState(false);
   useEffect(() => {
     if (!isCreditCard) {
       setValue("installments", "1");
@@ -60,6 +60,7 @@ export const PaymentForm = () => {
   };
 
   const onSubmit = (data) => {
+    setIsSubmit(true);
     updatePaymentDetails({
       numeroTarjeta: data.numeroTarjeta,
       mesExpiracion: data.expirationDate.split("/")[0],
@@ -191,7 +192,9 @@ export const PaymentForm = () => {
           />
         </div>
         <div className="mt-5">
-          <Button type="submit">Enviar</Button>
+          <Button type="submit" disabled={isSubmit}>
+            Enviar
+          </Button>
         </div>
       </form>
     </div>
