@@ -116,36 +116,36 @@ const Page = () => {
                 </>
               )}
             </div>
-            <div className="flex justify-center my-5"> 
-            <Dialog>
-
-              <DialogTrigger asChild>
-                <Button variant="outline">Ver guía de talles</Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Guia de talles</DialogTitle>
-                </DialogHeader>
-                <img src={imgSize}  alt=""/>
-              </DialogContent>
-            </Dialog>
-
-            </div>
             {product.categoria != "accesorios" && (
-              <div className="flex justify-center mt-5">
-                {product.talles.map(
-                  (t, index) =>
-                    t.stock > 0 && (
-                      <Button
-                        key={index}
-                        variant={size == t.nombre ? "" : "outline"}
-                        className="font-mono uppercase mx-1 border-black"
-                        onClick={() => setSize(t.nombre)}
-                      >
-                        {t.nombre}
-                      </Button>
-                    )
-                )}
+              <div>
+                <div className="flex justify-center my-5">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline">Ver guía de talles</Button>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-[425px]">
+                      <DialogHeader>
+                        <DialogTitle>Guia de talles</DialogTitle>
+                      </DialogHeader>
+                      <img src={imgSize} alt="" />
+                    </DialogContent>
+                  </Dialog>
+                </div>
+                <div className="flex justify-center mt-5">
+                  {product.talles.map(
+                    (t, index) =>
+                      t.stock > 0 && (
+                        <Button
+                          key={index}
+                          variant={size == t.nombre ? "" : "outline"}
+                          className="font-mono uppercase mx-1 border-black"
+                          onClick={() => setSize(t.nombre)}
+                        >
+                          {t.nombre}
+                        </Button>
+                      )
+                  )}
+                </div>
               </div>
             )}
             <div className="flex justify-center  my-5">
