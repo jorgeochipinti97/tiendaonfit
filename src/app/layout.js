@@ -5,7 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import { Navbar } from "@/components/Navbar";
 import { Cart } from "@/components/Cart";
 import { Toaster } from "@/components/ui/toaster";
-
+import { Analytics } from "@vercel/analytics/react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -24,6 +24,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body className={inter.className}>
+        <Analytics />
         <Navbar />
         <div className="fixed bottom-20 z-50 right-2">
           <Cart />
