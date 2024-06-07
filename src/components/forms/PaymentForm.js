@@ -59,7 +59,7 @@ export const PaymentForm = () => {
     setValue("installments", value);
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setIsSubmit(true);
     updatePaymentDetails({
       numeroTarjeta: data.numeroTarjeta,
@@ -72,18 +72,29 @@ export const PaymentForm = () => {
       cuotas: parseInt(data.installments),
       tarjetaSeleccionada: selectedCard.value,
     });
-    
+
     toast({
       title: "Aguarde por favor",
       description: "Se esta procesando el pago.",
     });
+    try {
+      await submitGlobalForm();
+      toast({
+        title: "Pago aprobado",
+        description: "Tu pago ha sido procesado con éxito.",
+      });
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Ha ocurrido un error en el proceso.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmit(false);
+    }
   };
 
-  // useEffect(() => {
-  //   if (paymentDetails.numeroTarjeta) {
-  //     submitGlobalForm();
-  //   }
-  // }, [paymentDetails]);
+ 
 
   return (
     <div>

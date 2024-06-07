@@ -14,6 +14,7 @@ function useGlobalForm() {
   const { push } = useRouter();
   const [trackId, setTrackId] = useState();
   const { toast } = useToast();
+  const [formSubmitted, setFormSubmitted] = useState(false); // Estado adicional
 
   const {
     shippingDetails,
@@ -234,7 +235,6 @@ function useGlobalForm() {
       payment_method_id: paymentDetails.tarjetaSeleccionada,
       bin: "450799",
       amount: Math.round(total * 100),
-      // amount: 2900,
       currency: "ARS",
       site_id: "00270150",
       establishment_name: "Tienda Onfit",
