@@ -72,18 +72,18 @@ export const PaymentForm = () => {
       cuotas: parseInt(data.installments),
       tarjetaSeleccionada: selectedCard.value,
     });
-
+    
     toast({
       title: "Aguarde por favor",
       description: "Se esta procesando el pago.",
     });
   };
 
-  useEffect(() => {
-    if (paymentDetails.numeroTarjeta) {
-      submitGlobalForm();
-    }
-  }, [paymentDetails]);
+  // useEffect(() => {
+  //   if (paymentDetails.numeroTarjeta) {
+  //     submitGlobalForm();
+  //   }
+  // }, [paymentDetails]);
 
   return (
     <div>

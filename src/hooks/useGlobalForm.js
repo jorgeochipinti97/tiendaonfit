@@ -233,8 +233,8 @@ function useGlobalForm() {
       token: token,
       payment_method_id: paymentDetails.tarjetaSeleccionada,
       bin: "450799",
-      // amount: Math.round(total * 100),
-      amount: 2900,
+      amount: Math.round(total * 100),
+      // amount: 2900,
       currency: "ARS",
       site_id: "00270150",
       establishment_name: "Tienda Onfit",
@@ -357,7 +357,6 @@ function useGlobalForm() {
   const submitGlobalForm = async () => {
     try {
       await generarToken();
-      // console.log(products);
     } catch (error) {
       console.error(error);
       toast({
