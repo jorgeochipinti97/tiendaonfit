@@ -36,7 +36,7 @@ export const ProductCard = ({ product }) => {
   const enlaceWaLink_ = `https://wa.me/5491132856744?text=${mensajeUrlEncoded_}`;
   return (
     <div className="flex justify-center  m-2">
-      <div className="w-[300px] md:w-[400px] ">
+      <div className="w-[300px] md:w-[400px] " onClick={()=>push(`/product?_id=${product._id}`)}>
         <div className="flex flex-col bg-black items-center justify-center rounded-xl  ">
           <Card className="  bg-transparent w-10/12 border-none">
             <CardTitle className=" font-geist text-center text-xl text-white py-5  ">
