@@ -22,7 +22,7 @@ const useFacebookPixel = () => {
     })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
 
     // Inicializa el píxel
-    fbq('init', '1123395375368707'); // Cambia 'YOUR_PIXEL_ID' por tu ID real
+    fbq('init', '106348862491542'); // Cambia 'YOUR_PIXEL_ID' por tu ID real
     fbq('track', 'PageView');
   }, []);
 
