@@ -36,20 +36,25 @@ export const ProductCard = ({ product }) => {
   const enlaceWaLink_ = `https://wa.me/5491132856744?text=${mensajeUrlEncoded_}`;
   return (
     <div className="flex justify-center  m-2">
-      <div className="w-[300px] md:w-[400px] " onClick={()=>push(`/product?_id=${product._id}`)}>
+      <div
+        className="w-[300px] md:w-[400px] "
+        onClick={() => push(`/product?_id=${product._id}`)}
+      >
         <div className="flex flex-col bg-black items-center justify-center rounded-xl  ">
           <Card className="  bg-transparent w-10/12 border-none">
             <CardTitle className=" font-geist text-center text-xl text-white py-5  ">
               {product.titulo}
+
             </CardTitle>
             <CardContent
               className="h-[300px] md:h-[400px]  rounded-xl flex flex-col justify-end"
               style={{
-                backgroundImage: `url(https://d2hh41w9oz00ab.cloudfront.net/${product.images[0]})`,
+                backgroundImage: `url(https://tiendaonfit.s3.amazonaws.com/${product.images[0]})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
+
               <div>
                 <div className="flex justify-around items-end mt-5">
                   {product.precioDescuento ? (
@@ -68,6 +73,7 @@ export const ProductCard = ({ product }) => {
                     </p>
                   )}
                 </div>
+
               </div>
             </CardContent>
           </Card>
@@ -89,8 +95,7 @@ export const ProductCard = ({ product }) => {
                 Ver producto
               </Button>
             </div>
-            {(product.categoria != "accesorios") &&
-            (
+            {product.categoria != "accesorios" && (
               <div className="flex justify-center mt-5">
                 {product.talles.map(
                   (t, index) =>

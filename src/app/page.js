@@ -109,7 +109,7 @@ export default function Home() {
       </div>
       <div className="flex justify-around my-10 rounded-xl   md:hidden">
         <video
-          src="https://royer-bucket.s3.sa-east-1.amazonaws.com/buzos.MOV"
+          src="https://tiendaonfit.s3.amazonaws.com/buzos.MOV"
           loop
           playsInline
           autoPlay
@@ -125,7 +125,7 @@ export default function Home() {
             </p>
           </div>
           <video
-            src="https://royer-bucket.s3.sa-east-1.amazonaws.com/end.mp4"
+            src="https://tiendaonfit.s3.amazonaws.com/end.mp4"
             loop
             autoPlay
             muted
@@ -133,7 +133,7 @@ export default function Home() {
             className=" w-10/12 rounded-xl hidden md:block"
           />
           <video
-            src="https://royer-bucket.s3.sa-east-1.amazonaws.com/end.MOV"
+            src="https://tiendaonfit.s3.amazonaws.com/end.MOV"
             loop
             autoPlay
             muted

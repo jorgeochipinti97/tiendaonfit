@@ -76,7 +76,7 @@ const Page = () => {
             {product.images.length == 1 ? (
               <div className="flex justify-center">
                 <img
-                  src={`https://d2hh41w9oz00ab.cloudfront.net/${product.images[0]}`}
+                  src={`https://tiendaonfit.s3.amazonaws.com/${product.images[0]}`}
                   alt=""
                   className="h-[80vh] rounded-xl"
                 />

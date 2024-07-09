@@ -56,7 +56,7 @@ export const Navbar = () => {
                 title="Indumentaria"
                 onMouseEnter={() =>
                   handleMouseEnter(
-                    "https://d2hh41w9oz00ab.cloudfront.net/TIENDA+ONFIT/Buzos/Galaxy/11zon_converted/OnFit5334_2_11zon.webp"
+                    "https://tiendaonfit.s3.amazonaws.com/TIENDA+ONFIT/Buzos/Galaxy/11zon_converted/OnFit5334_2_11zon.webp"
                   )
                 }
                 onMouseLeave={() => handleMouseEnter("/hotsale.png")}
@@ -70,7 +70,7 @@ export const Navbar = () => {
                 title="Accesorios"
                 onMouseEnter={() =>
                   handleMouseEnter(
-                    "https://d2hh41w9oz00ab.cloudfront.net/TIENDA+ONFIT/guantes/OnFitII1671.jpg"
+                    "https://tiendaonfit.s3.amazonaws.com/TIENDA+ONFIT/guantes/OnFitII1671.jpg"
                   )
                 }
                 onMouseLeave={() => handleMouseEnter("/hotsale.png")}
@@ -84,7 +84,7 @@ export const Navbar = () => {
                 title="Equipamiento"
                 onMouseEnter={() =>
                   handleMouseEnter(
-                    "https://d2hh41w9oz00ab.cloudfront.net/TIENDA+ONFIT/BICICLETA+INDOOR+NORDIKA+2.0+(1).webp"
+                    "https://tiendaonfit.s3.amazonaws.com/CINTA+NORDIkA+840+(2).webp"
                   )
                 }
                 onMouseLeave={() => handleMouseEnter("/hotsale.png")}
