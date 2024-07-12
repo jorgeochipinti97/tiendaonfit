@@ -1,21 +1,8 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -31,7 +18,6 @@ import {
 } from "@/components/ui/table";
 
 import { Button } from "../ui/button";
-
 import { formatCurrency } from "@/lib/utils";
 import useStore from "@/lib/cart";
 import { CheckoutForm } from "../forms/CheckoutForm";

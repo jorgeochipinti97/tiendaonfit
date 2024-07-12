@@ -49,7 +49,7 @@ export const ProductCard = ({ product }) => {
             <CardContent
               className="h-[300px] md:h-[400px]  rounded-xl flex flex-col justify-end"
               style={{
-                backgroundImage: `url(https://tiendaonfit.s3.amazonaws.com/${product.images[0]})`,
+                backgroundImage: `url(https://dtkw3k8jwufs8.cloudfront.net/${product.images[0]})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
