@@ -83,7 +83,7 @@ const EmblaCarousel = (props) => {
             <div className="embla__slide flex  justify-center items-center" key={index}>
               <img
                 className="embla__slide__img "
-                src={`https://tiendaonfit.s3.amazonaws.com/${src}`}
+                src={`https://dtkw3k8jwufs8.cloudfront.net/${src}`}
                 alt="Your alt text"
               />
             </div>
