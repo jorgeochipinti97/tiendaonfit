@@ -37,7 +37,7 @@ export const ProductCard = ({ product }) => {
   return (
     <div className="flex justify-center  m-2">
       <div
-        className="w-[300px] md:w-[400px] cursor-pointer "
+        className="w-[300px] md:w-[350px] cursor-pointer "
         onClick={() => push(`/product?_id=${product._id}`)}
       >
         <div className="flex flex-col bg-black items-center justify-center rounded-xl  ">

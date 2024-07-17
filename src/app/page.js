@@ -85,7 +85,7 @@ export default function Home() {
       </div> */}
 
       <div className="">
-        <p className="font-geist tracking-tighter font-bold text-4xl md:text-7xl mb-5 mt-20  opacity-50 ml-5 ">
+        <p className="font-geist text-start md:text-center tracking-tighter font-bold text-4xl md:text-7xl mb-5 mt-20  opacity-50 ml-5 ">
           Nuestros buzos
         </p>
 
