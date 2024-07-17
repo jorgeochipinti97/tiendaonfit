@@ -25,7 +25,7 @@ export default function Home() {
         Como si fuera poco, con tu compra te llevas un regalito de OnFit...
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 w-screen mt-5 md:mt-20">
+      {/* <div className="grid grid-cols-1 md:grid-cols-2 w-screen mt-5 md:mt-20">
         <div className="flex justify-center">
           <video
             src="/videovertical.mp4"
@@ -42,10 +42,10 @@ export default function Home() {
             className="w-11/12 md:w-8/12 my-10 rounded-xl"
           />
         </div>
-      </div>
+      </div> */}
 
       <div>
-        <p className="font-geist tracking-tighter font-bold text-4xl md:text-7xl  opacity-50 ml-5 mb-5 ">
+        <p className="font-geist tracking-tighter font-bold text-4xl md:text-7xl mt-10  opacity-50 ml-5 mb-5 ">
           Descubre nuestras Remeras Oversize
         </p>
         <ScrollArea className="  rounded-md border">
@@ -62,13 +62,9 @@ export default function Home() {
           </div>
         </ScrollArea>
       </div>
-      {/* <div
-        style={{ backgroundImage: "linear-gradient(129deg, rgba(0,0,0,0.30634191176470584) 10%, rgba(0,0,0,.5) 96%),url('./gim.jpg')", backgroundSize:'cover', backgroundPosition:'center'
-         }}
-        className="h-[40vh]"
-      ></div> */}
 
-      <div className="flex justify-around my-10 rounded-xl">
+
+      {/* <div className="flex justify-around my-10 rounded-xl">
         <video
           src="https://dtkw3k8jwufs8.cloudfront.net/onfit.MOV"
           loop
@@ -86,14 +82,25 @@ export default function Home() {
           muted
           className="w-3/12 rounded-xl hidden md:block  "
         />
-      </div>
+      </div> */}
 
       <div className="">
-        <p className="font-geist tracking-tighter font-bold text-4xl md:text-7xl mb-5  opacity-50 ml-5 ">
+        <p className="font-geist tracking-tighter font-bold text-4xl md:text-7xl mb-5 mt-20  opacity-50 ml-5 ">
           Nuestros buzos
         </p>
 
-        <ScrollArea className="  rounded-md border">
+        <div className="flex max-w-screen ">
+          <div className="md:flex  w-screen justify-center hidden ">
+            {products &&
+              products
+                .filter((r) => r.subcategoria == "buzo")
+                .map((e) => (
+                  <div key={e._id}>
+                    <ProductCard product={e} />
+                  </div>
+                ))}
+          </div>
+        <ScrollArea className="  rounded-md border md:hidden  block">
           <div className="flex max-w-screen">
             {products &&
               products
@@ -106,17 +113,9 @@ export default function Home() {
             <ScrollBar orientation="horizontal" />
           </div>
         </ScrollArea>
+        </div>
       </div>
-      <div className="flex justify-around my-10 rounded-xl   md:hidden">
-        <video
-          src="https://dtkw3k8jwufs8.cloudfront.net/buzos.MOV"
-          loop
-          playsInline
-          autoPlay
-          muted
-          className="w-10/12 rounded-xl  "
-        />
-      </div>
+  
       <section className="mt-20">
         <div className="flex justify-start items-center w-screen flex-col">
           <div>
@@ -133,7 +132,7 @@ export default function Home() {
             className=" w-10/12 rounded-xl hidden md:block"
           />
           <video
-            src="https://dtkw3k8jwufs8.cloudfront.net/end.MOV"
+            src="https://dtkw3k8jwufs8.cloudfront.net/end.mp4"
             loop
             autoPlay
             muted

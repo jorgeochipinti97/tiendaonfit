@@ -37,7 +37,7 @@ export const ProductCard = ({ product }) => {
   return (
     <div className="flex justify-center  m-2">
       <div
-        className="w-[300px] md:w-[400px] "
+        className="w-[300px] md:w-[400px] cursor-pointer "
         onClick={() => push(`/product?_id=${product._id}`)}
       >
         <div className="flex flex-col bg-black items-center justify-center rounded-xl  ">
@@ -94,38 +94,6 @@ export const ProductCard = ({ product }) => {
               >
                 Ver producto
               </Button>
-            </div>
-            {product.categoria != "accesorios" && (
-              <div className="flex justify-center mt-5">
-                {product.talles.map(
-                  (t, index) =>
-                    t.stock > 0 && (
-                      <Button
-                        key={index}
-                        variant={size == t.nombre ? "" : "outline"}
-                        className="font-mono uppercase mx-1"
-                        onClick={() => setSize(t.nombre)}
-                      >
-                        {t.nombre}
-                      </Button>
-                    )
-                )}
-              </div>
-            )}
-
-            <div className="flex w-full mt-5 justify-start  ">
-              {product.categoria != "equipamiento" ? (
-                <Button
-                  className=" font-geist mx-1  tracking-tighter"
-                  onClick={handleAddToCart}
-                >
-                  Agregar al carrito
-                </Button>
-              ) : (
-                <Button onClick={() => push(enlaceWaLink_)}>
-                  Consultar ahora
-                </Button>
-              )}
             </div>
           </div>
         </div>
