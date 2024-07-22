@@ -45,24 +45,36 @@ export default function Home() {
       </div> */}
 
       <div>
-        <p className="font-geist tracking-tighter font-bold text-4xl md:text-7xl mt-10  opacity-50 ml-5 mb-5 ">
-          Descubre nuestras Remeras Oversize
+      <p className="font-geist text-start md:text-center tracking-tighter font-bold text-4xl md:text-7xl mb-5 mt-20  opacity-50 ml-5 ">
+      Descubre nuestras Remeras Oversize
         </p>
-        <ScrollArea className="  rounded-md border">
-          <div className="flex max-w-screen">
+        <div className="flex max-w-screen ">
+          <div className="md:flex  w-screen justify-center hidden ">
             {products &&
               products
                 .filter((r) => r.subcategoria == "remera_oversize")
+                .slice(0, 4)
                 .map((e) => (
                   <div key={e._id}>
                     <ProductCard product={e} />
                   </div>
                 ))}
-            <ScrollBar orientation="horizontal" />
           </div>
-        </ScrollArea>
+        </div>
+        <ScrollArea className="  rounded-md border md:hidden  block">
+            <div className="flex max-w-screen">
+              {products &&
+                products
+                .filter((r) => r.subcategoria == "remera_oversize")
+                  .map((e) => (
+                    <div key={e._id}>
+                      <ProductCard product={e} />
+                    </div>
+                  ))}
+              <ScrollBar orientation="horizontal" />
+            </div>
+          </ScrollArea>
       </div>
-
 
       {/* <div className="flex justify-around my-10 rounded-xl">
         <video
@@ -100,22 +112,22 @@ export default function Home() {
                   </div>
                 ))}
           </div>
-        <ScrollArea className="  rounded-md border md:hidden  block">
-          <div className="flex max-w-screen">
-            {products &&
-              products
-                .filter((r) => r.subcategoria == "buzo")
-                .map((e) => (
-                  <div key={e._id}>
-                    <ProductCard product={e} />
-                  </div>
-                ))}
-            <ScrollBar orientation="horizontal" />
-          </div>
-        </ScrollArea>
+          <ScrollArea className="  rounded-md border md:hidden  block">
+            <div className="flex max-w-screen">
+              {products &&
+                products
+                  .filter((r) => r.subcategoria == "buzo")
+                  .map((e) => (
+                    <div key={e._id}>
+                      <ProductCard product={e} />
+                    </div>
+                  ))}
+              <ScrollBar orientation="horizontal" />
+            </div>
+          </ScrollArea>
         </div>
       </div>
-  
+
       <section className="mt-20">
         <div className="flex justify-start items-center w-screen flex-col">
           <div>

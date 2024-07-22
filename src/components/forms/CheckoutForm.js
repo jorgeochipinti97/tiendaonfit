@@ -13,7 +13,7 @@ import { AddressForm } from "./AddressForm";
 import { Button } from "../ui/button";
 
 
-export const CheckoutForm = () => {
+export const CheckoutForm = ({total}) => {
   const addressFormRef = useRef(null);
   const paymentFormRef = useRef(null);
   const dialogFormRef = useRef(null);
@@ -22,7 +22,7 @@ export const CheckoutForm = () => {
     const isMobile = window.innerWidth <= 768; // Define un umbral para dispositivos móviles
 
     gsap.to(dialogFormRef.current, {
-      height: isMobile ? "50vh" : "50vh",
+      height: isMobile ? "60vh" : "60vh",
       duration: 0.5,
       delay: 0.5,
     });
@@ -59,7 +59,7 @@ export const CheckoutForm = () => {
                 style={{ display: "none", opacity: 0 }}
                 ref={paymentFormRef}
               >
-                <PaymentForm />
+                <PaymentForm  total={total} />
               </div>
             </DialogDescription>
           </DialogHeader>

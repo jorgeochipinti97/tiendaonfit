@@ -3,8 +3,7 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import useGlobalForm from "@/hooks/useGlobalForm";
-
-
+import useShippingDetails from "@/hooks/useShippingDetails";
 
 export const AddressForm = ({ handleNext }) => {
   const {
@@ -16,9 +15,7 @@ export const AddressForm = ({ handleNext }) => {
 
   const { updateShippingDetails } = useGlobalForm();
 
-
   const onSubmit = (data) => {
-    // Actualiza los detalles de envío en el estado global
     updateShippingDetails({
       firstName: data.name,
       lastName: data.lastName,
@@ -30,11 +27,11 @@ export const AddressForm = ({ handleNext }) => {
       city: data.city,
       provincia: data.provincia,
       mobile: data.phone,
-      idNumber:data.idNumber
+      idNumber: data.idNumber,
     });
+    console.log(data);
 
-    handleNext(); 
-
+    handleNext();
   };
 
   return (
@@ -50,11 +47,11 @@ export const AddressForm = ({ handleNext }) => {
           className="my-1"
           {...register("lastName", { required: true })}
         />
-          <Input
-            placeholder="DNI"
-            className="my-1"
-            {...register("idNumber", { required: true })}
-          />
+        <Input
+          placeholder="DNI"
+          className="my-1"
+          {...register("idNumber", { required: true })}
+        />
         <Input
           placeholder="Email"
           className="my-1"

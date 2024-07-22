@@ -8,13 +8,14 @@ import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 
 import { useEffect, useState } from "react";
+import useDiscount from "./useDiscount";
 
 function useGlobalForm() {
   const trackEvent = useFacebookPixel();
   const { push } = useRouter();
   const [trackId, setTrackId] = useState();
   const { toast } = useToast();
-  const [formSubmitted, setFormSubmitted] = useState(false); // Estado adicional
+  const { discountCode, discountCodes } = useDiscount();
 
   const {
     shippingDetails,
@@ -82,7 +83,7 @@ function useGlobalForm() {
   ];
 
   const products = useStore((state) => state.getProducts()); // Usar el selector para obtener los productos
-  const total = useStore((state) => state.getTotal()); // Obtener el total monetario del carrito
+  // const total = useStore((state) => state.getTotal());
 
   const obtenerSkuPorIdYTalle = (id, talle) => {
     const resultado = sku.find((s) => {
@@ -184,20 +185,20 @@ function useGlobalForm() {
     }
   };
 
-  const generarToken = async () => {
+  const generarToken = async (data, total) => {
     try {
       const apiKey = "16e8508ea61d4c4d8093f16d8ee9a3c2"; // Reemplaza con tu API Key
       const response = await axios.post(
         "https://ventasonline.payway.com.ar/api/v2/tokens",
         {
-          card_number: paymentDetails.numeroTarjeta,
-          card_expiration_month: paymentDetails.mesExpiracion,
-          card_expiration_year: paymentDetails.anioExpiracion,
-          security_code: paymentDetails.codigoSeguridad,
-          card_holder_name: paymentDetails.nombreTitular,
+          card_number: data.numeroTarjeta,
+          card_expiration_month: data.mesExpiracion,
+          card_expiration_year: data.anioExpiracion,
+          security_code: data.codigoSeguridad,
+          card_holder_name: data.nombreTitular,
           card_holder_identification: {
-            type: paymentDetails.tipoIdentificacion,
-            number: paymentDetails.numeroIdentificacion,
+            type: data.tipoIdentificacion,
+            number: data.numeroIdentificacion,
           },
         },
         {
@@ -209,7 +210,7 @@ function useGlobalForm() {
       );
 
       if (response.data) {
-        await getPayment(response.data.id);
+        await getPayment(response.data.id, data, total);
       }
     } catch (error) {
       console.error(error);
@@ -221,9 +222,8 @@ function useGlobalForm() {
     }
   };
 
-  const getPayment = async (token) => {
+  const getPayment = async (token, data, total) => {
     const apikey = "ba0fb5b8bed24975af3ef167e1dcae71"; // Reemplaza con tu API Key
-
     const datos = {
       customer: {
         id: `${shippingDetails.firstName} ${shippingDetails.lastName}`,
@@ -232,13 +232,14 @@ function useGlobalForm() {
       user_id: "customer",
       site_transaction_id: uuidv4(),
       token: token,
-      payment_method_id: paymentDetails.tarjetaSeleccionada,
+      payment_method_id: data.tarjetaSeleccionada,
       bin: "450799",
+      // amount: 2900,
       amount: Math.round(total * 100),
       currency: "ARS",
       site_id: "00270150",
       establishment_name: "Tienda Onfit",
-      installments: paymentDetails.cuotas,
+      installments: data.cuotas,
       description: "pago Onfit",
       payment_type: "single",
       sub_payments: [],
@@ -257,10 +258,10 @@ function useGlobalForm() {
       );
 
       if (response.data.status === "approved") {
-        await createOrder(
-          response.data.token,
-          response.data.site_transaction_id
-        );
+        // await createOrder(
+        //   response.data.token,
+        //   response.data.site_transaction_id,total
+        // );
         toast({
           title: "Pago aprobado",
           description: "Tu pago ha sido aprobado.",
@@ -276,7 +277,7 @@ function useGlobalForm() {
     }
   };
 
-  const createOrder = async (token, transactionId) => {
+  const createOrder = async (token, transactionId, total) => {
     if (!products || !total || !shippingDetails || !paymentDetails) {
       throw new Error("Faltan datos necesarios para crear la orden.");
     }
@@ -287,13 +288,13 @@ function useGlobalForm() {
             _id: e._id,
             title: e.titulo,
             price: e.precio,
-            images: e.images[0], 
-            sku: obtenerSkuPorIdYTalle(e._id, e.size), 
+            images: e.images[0],
+            sku: obtenerSkuPorIdYTalle(e._id, e.size),
             quantity: e.quantity,
           };
         }),
-        numberOfItems: products ? products.length : 0, 
-        total: total, 
+        numberOfItems: products ? products.length : 0,
+        total: total,
         transactionId: transactionId,
         token: token,
         titular: `${shippingDetails.firstName} ${shippingDetails.lastName}`,
@@ -307,11 +308,9 @@ function useGlobalForm() {
         phone: shippingDetails.mobile,
         dniTitular: `${shippingDetails.idNumber}`,
         postalCode: shippingDetails.postalCode,
-        discountPrice: 0,
+        discountPrice: discountAmount ? discountAmount : 0,
         cuotas: `${paymentDetails.cuotas}`,
-        discountCode: paymentDetails.discountCode
-          ? `${paymentDetails.discountCode}`
-          : "-",
+        discountCode: discountCode.name ? discountCode.name : "-",
       };
 
       const createOrderResponse = await axios.post("/api/orders", orderData);
@@ -354,9 +353,9 @@ function useGlobalForm() {
     }
   };
 
-  const submitGlobalForm = async () => {
+  const submitGlobalForm = async (data, total) => {
     try {
-      await generarToken();
+      await updatePaymentDetails(data);
     } catch (error) {
       console.error(error);
       toast({
@@ -364,6 +363,8 @@ function useGlobalForm() {
         description: "Ha ocurrido un error en el proceso.",
         variant: "destructive",
       });
+    } finally {
+      await generarToken(data, total);
     }
   };
 

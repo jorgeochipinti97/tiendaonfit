@@ -13,10 +13,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useGlobalForm from "@/hooks/useGlobalForm";
+import useDiscount from "@/hooks/useDiscount";
 
-export const PaymentForm = () => {
-  const { updatePaymentDetails, submitGlobalForm, paymentDetails } =
-    useGlobalForm();
+export const PaymentForm = ({total}) => {
+
+  const { submitGlobalForm } = useGlobalForm();
   const [isCreditCard, setIsCreditCard] = useState();
   const { toast } = useToast();
   const [selectedCard, setSelectedCard] = useState({
@@ -60,28 +61,22 @@ export const PaymentForm = () => {
   };
 
   const onSubmit = async (data) => {
-    setIsSubmit(true);
-    updatePaymentDetails({
-      numeroTarjeta: data.numeroTarjeta,
-      mesExpiracion: data.expirationDate.split("/")[0],
-      anioExpiracion: data.expirationDate.split("/")[1],
-      codigoSeguridad: data.cvv,
-      nombreTitular: data.nombreTitular,
-      tipoIdentificacion: "dni",
-      numeroIdentificacion: data.numeroIdentificacion,
-      cuotas: parseInt(data.installments),
-      tarjetaSeleccionada: selectedCard.value,
-    });
-
-    toast({
-      title: "Aguarde por favor",
-      description: "Se esta procesando el pago.",
-    });
     try {
-      await submitGlobalForm();
+      setIsSubmit(true);
+      await submitGlobalForm({
+        numeroTarjeta: data.numeroTarjeta,
+        mesExpiracion: data.expirationDate.split("/")[0],
+        anioExpiracion: data.expirationDate.split("/")[1],
+        codigoSeguridad: data.cvv,
+        nombreTitular: data.nombreTitular,
+        tipoIdentificacion: "dni",
+        numeroIdentificacion: data.numeroIdentificacion,
+        cuotas: parseInt(data.installments),
+        tarjetaSeleccionada: selectedCard.value,
+      },total);
       toast({
-        title: "Pago aprobado",
-        description: "Tu pago ha sido procesado con éxito.",
+        title: "Aguarde por favor",
+        description: "Se esta procesando el pago.",
       });
     } catch (error) {
       toast({
@@ -93,8 +88,6 @@ export const PaymentForm = () => {
       setIsSubmit(false);
     }
   };
-
- 
 
   return (
     <div>
@@ -148,6 +141,7 @@ export const PaymentForm = () => {
             className="my-1"
           />
         </div>
+
         {isCreditCard && (
           <div>
             <Select
@@ -202,6 +196,7 @@ export const PaymentForm = () => {
             })}
           />
         </div>
+
         <div className="mt-5">
           <Button type="submit" disabled={isSubmit}>
             Enviar
