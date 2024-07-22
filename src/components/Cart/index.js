@@ -40,7 +40,7 @@ export const Cart = ({ isToast }) => {
 
   const applyDiscountCode = (code, total) => {
     const discount = discountCodes.find(
-      (discountCode) => discountCode.name === code
+      (discountCode) => discountCode.name.toLowerCase() === code.toLowerCase()
     );
     if (discount) {
       const discountAmount = discount.isPercentaje
@@ -185,6 +185,7 @@ export const Cart = ({ isToast }) => {
           <div className="flex justify-start">
             <CheckoutForm
               total={discountAmount > 0 ? total - discountAmount : total}
+              discountCode={code}
             />
           </div>
         </DialogDescription>

@@ -15,7 +15,7 @@ function useGlobalForm() {
   const { push } = useRouter();
   const [trackId, setTrackId] = useState();
   const { toast } = useToast();
-  const { discountCode, discountCodes } = useDiscount();
+
 
   const {
     shippingDetails,
@@ -185,7 +185,7 @@ function useGlobalForm() {
     }
   };
 
-  const generarToken = async (data, total) => {
+  const generarToken = async (data, total,discountCode) => {
     try {
       const apiKey = "16e8508ea61d4c4d8093f16d8ee9a3c2"; // Reemplaza con tu API Key
       const response = await axios.post(
@@ -210,7 +210,7 @@ function useGlobalForm() {
       );
 
       if (response.data) {
-        await getPayment(response.data.id, data, total);
+        await getPayment(response.data.id, data, total,discountCode);
       }
     } catch (error) {
       console.error(error);
@@ -222,7 +222,7 @@ function useGlobalForm() {
     }
   };
 
-  const getPayment = async (token, data, total) => {
+  const getPayment = async (token, data, total,discountCode) => {
     const apikey = "ba0fb5b8bed24975af3ef167e1dcae71"; // Reemplaza con tu API Key
     const datos = {
       customer: {
@@ -260,7 +260,7 @@ function useGlobalForm() {
       if (response.data.status === "approved") {
         await createOrder(
           response.data.token,
-          response.data.site_transaction_id,total
+          response.data.site_transaction_id,total,discountCode
         );
         toast({
           title: "Pago aprobado",
@@ -308,9 +308,9 @@ function useGlobalForm() {
         phone: shippingDetails.mobile,
         dniTitular: `${shippingDetails.idNumber}`,
         postalCode: shippingDetails.postalCode,
-        discountPrice: discountAmount ? discountAmount : 0,
+        discountPrice: 0,
         cuotas: `${paymentDetails.cuotas}`,
-        discountCode: discountCode.name ? discountCode.name : "-",
+        discountCode: discountCode ? discountCode : "-",
       };
 
       const createOrderResponse = await axios.post("/api/orders", orderData);
@@ -353,7 +353,7 @@ function useGlobalForm() {
     }
   };
 
-  const submitGlobalForm = async (data, total) => {
+  const submitGlobalForm = async (data, total,discountCode) => {
     try {
       await updatePaymentDetails(data);
     } catch (error) {
@@ -364,7 +364,7 @@ function useGlobalForm() {
         variant: "destructive",
       });
     } finally {
-      await generarToken(data, total);
+      await generarToken(data, total,discountCode);
     }
   };
 

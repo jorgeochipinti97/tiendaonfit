@@ -13,10 +13,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import useGlobalForm from "@/hooks/useGlobalForm";
-import useDiscount from "@/hooks/useDiscount";
+import { formatCurrency } from "@/lib/utils";
 
-export const PaymentForm = ({total}) => {
-
+export const PaymentForm = ({ total, discountCode }) => {
   const { submitGlobalForm } = useGlobalForm();
   const [isCreditCard, setIsCreditCard] = useState();
   const { toast } = useToast();
@@ -63,17 +62,21 @@ export const PaymentForm = ({total}) => {
   const onSubmit = async (data) => {
     try {
       setIsSubmit(true);
-      await submitGlobalForm({
-        numeroTarjeta: data.numeroTarjeta,
-        mesExpiracion: data.expirationDate.split("/")[0],
-        anioExpiracion: data.expirationDate.split("/")[1],
-        codigoSeguridad: data.cvv,
-        nombreTitular: data.nombreTitular,
-        tipoIdentificacion: "dni",
-        numeroIdentificacion: data.numeroIdentificacion,
-        cuotas: parseInt(data.installments),
-        tarjetaSeleccionada: selectedCard.value,
-      },total);
+      await submitGlobalForm(
+        {
+          numeroTarjeta: data.numeroTarjeta,
+          mesExpiracion: data.expirationDate.split("/")[0],
+          anioExpiracion: data.expirationDate.split("/")[1],
+          codigoSeguridad: data.cvv,
+          nombreTitular: data.nombreTitular,
+          tipoIdentificacion: "dni",
+          numeroIdentificacion: data.numeroIdentificacion,
+          cuotas: parseInt(data.installments),
+          tarjetaSeleccionada: selectedCard.value,
+        },
+        total,
+        discountCode
+      );
       toast({
         title: "Aguarde por favor",
         description: "Se esta procesando el pago.",
@@ -91,6 +94,15 @@ export const PaymentForm = ({total}) => {
 
   return (
     <div>
+      {discountCode ? (
+        <p className="my-5 text-black tracking-tighter font-bold">
+          {formatCurrency(total)} - {discountCode}{" "}
+        </p>
+      ) : (
+        <p className="my-5 text-black tracking-tighter font-bold">
+          {formatCurrency(total)}
+        </p>
+      )}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Select onValueChange={(e) => handleSelectChange(e)} required>
           <SelectTrigger className="w-full">

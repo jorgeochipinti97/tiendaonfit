@@ -13,11 +13,10 @@ import { AddressForm } from "./AddressForm";
 import { Button } from "../ui/button";
 
 
-export const CheckoutForm = ({total}) => {
+export const CheckoutForm = ({total,discountCode}) => {
   const addressFormRef = useRef(null);
   const paymentFormRef = useRef(null);
   const dialogFormRef = useRef(null);
-
   const handleNext = () => {
     const isMobile = window.innerWidth <= 768; // Define un umbral para dispositivos móviles
 
@@ -59,7 +58,7 @@ export const CheckoutForm = ({total}) => {
                 style={{ display: "none", opacity: 0 }}
                 ref={paymentFormRef}
               >
-                <PaymentForm  total={total} />
+                <PaymentForm  total={total}  discountCode={discountCode}/>
               </div>
             </DialogDescription>
           </DialogHeader>
