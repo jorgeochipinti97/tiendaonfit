@@ -258,10 +258,10 @@ function useGlobalForm() {
       );
 
       if (response.data.status === "approved") {
-        // await createOrder(
-        //   response.data.token,
-        //   response.data.site_transaction_id,total
-        // );
+        await createOrder(
+          response.data.token,
+          response.data.site_transaction_id,total
+        );
         toast({
           title: "Pago aprobado",
           description: "Tu pago ha sido aprobado.",
