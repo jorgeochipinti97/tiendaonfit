@@ -16,7 +16,6 @@ function useGlobalForm() {
   const [trackId, setTrackId] = useState();
   const { toast } = useToast();
 
-
   const {
     shippingDetails,
     paymentDetails,
@@ -185,7 +184,7 @@ function useGlobalForm() {
     }
   };
 
-  const generarToken = async (data, total,discountCode) => {
+  const generarToken = async (data, total, discountCode) => {
     try {
       const apiKey = "16e8508ea61d4c4d8093f16d8ee9a3c2"; // Reemplaza con tu API Key
       const response = await axios.post(
@@ -210,7 +209,7 @@ function useGlobalForm() {
       );
 
       if (response.data) {
-        await getPayment(response.data.id, data, total,discountCode);
+        await getPayment(response.data.id, data, total, discountCode);
       }
     } catch (error) {
       console.error(error);
@@ -222,7 +221,7 @@ function useGlobalForm() {
     }
   };
 
-  const getPayment = async (token, data, total,discountCode) => {
+  const getPayment = async (token, data, total, discountCode) => {
     const apikey = "ba0fb5b8bed24975af3ef167e1dcae71"; // Reemplaza con tu API Key
     const datos = {
       customer: {
@@ -260,7 +259,9 @@ function useGlobalForm() {
       if (response.data.status === "approved") {
         await createOrder(
           response.data.token,
-          response.data.site_transaction_id,total,discountCode
+          response.data.site_transaction_id,
+          total,
+          discountCode
         );
         toast({
           title: "Pago aprobado",
@@ -277,7 +278,7 @@ function useGlobalForm() {
     }
   };
 
-  const createOrder = async (token, transactionId, total) => {
+  const createOrder = async (token, transactionId, total,discountCode) => {
     if (!products || !total || !shippingDetails || !paymentDetails) {
       throw new Error("Faltan datos necesarios para crear la orden.");
     }
@@ -353,7 +354,7 @@ function useGlobalForm() {
     }
   };
 
-  const submitGlobalForm = async (data, total,discountCode) => {
+  const submitGlobalForm = async (data, total, discountCode) => {
     try {
       await updatePaymentDetails(data);
     } catch (error) {
@@ -364,7 +365,7 @@ function useGlobalForm() {
         variant: "destructive",
       });
     } finally {
-      await generarToken(data, total,discountCode);
+      await generarToken(data, total, discountCode);
     }
   };
 
