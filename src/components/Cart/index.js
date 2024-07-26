@@ -40,7 +40,8 @@ export const Cart = ({ isToast }) => {
 
   const applyDiscountCode = (code, total) => {
     let discountAmount = 0;
-    const specialDiscountCodes = ["PROMOFIT2024"];
+    const specialDiscountCodes = ["a1B2c3D4","X5Y6z7W8","P9Q0r1S2","T3U4v5W6"];
+
 
     if (specialDiscountCodes.includes(code.toUpperCase())) {
       if (total >= 60000) {
