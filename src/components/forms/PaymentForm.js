@@ -1,3 +1,4 @@
+'use client'
 import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
@@ -14,9 +15,12 @@ import {
 } from "@/components/ui/select";
 import useGlobalForm from "@/hooks/useGlobalForm";
 import { formatCurrency } from "@/lib/utils";
+import { useRouter } from "next/navigation";
+
 
 export const PaymentForm = ({ total, discountCode }) => {
-  const { submitGlobalForm } = useGlobalForm();
+  const { push } = useRouter();
+  const { submitGlobalForm,orderId } = useGlobalForm();
   const [isCreditCard, setIsCreditCard] = useState();
   const { toast } = useToast();
   const [selectedCard, setSelectedCard] = useState({
@@ -30,7 +34,6 @@ export const PaymentForm = ({ total, discountCode }) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const tarjetas = [
     { name: "Visa Crédito", value: 1 },
     { name: "Visa Débito", value: 31 },
@@ -88,7 +91,7 @@ export const PaymentForm = ({ total, discountCode }) => {
         variant: "destructive",
       });
     } finally {
-      setIsSubmit(false);
+      // push(`/order?_id=${orderId}`);
     }
   };
 

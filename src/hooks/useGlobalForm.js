@@ -11,11 +11,10 @@ import { useEffect, useState } from "react";
 import useDiscount from "./useDiscount";
 
 function useGlobalForm() {
+
   const trackEvent = useFacebookPixel();
-  const { push } = useRouter();
   const [trackId, setTrackId] = useState();
   const { toast } = useToast();
-
   const {
     shippingDetails,
     paymentDetails,
@@ -263,6 +262,7 @@ function useGlobalForm() {
           total,
           discountCode
         );
+
         toast({
           title: "Pago aprobado",
           description: "Tu pago ha sido aprobado.",
@@ -278,7 +278,7 @@ function useGlobalForm() {
     }
   };
 
-  const createOrder = async (token, transactionId, total,discountCode) => {
+  const createOrder = async (token, transactionId, total, discountCode) => {
     if (!products || !total || !shippingDetails || !paymentDetails) {
       throw new Error("Faltan datos necesarios para crear la orden.");
     }
@@ -334,15 +334,13 @@ function useGlobalForm() {
         );
 
         await Promise.all(stockUpdatePromises);
-
         trackEvent("Purchase", {
           content_ids: products.map((product) => product._id), // Agrega los IDs de los productos
           content_type: "product",
           value: total, // Aquí agrega el valor total de la compra
           currency: "ARS",
         });
-
-        response && push(`/order?_id=${createOrderResponse.data._id}`);
+        window.open(`/order?_id=${response.data._id}`, "_blank");
       }
     } catch (error) {
       console.error(error);
@@ -351,6 +349,7 @@ function useGlobalForm() {
         description: "No se pudo crear la orden.",
         variant: "destructive",
       });
+    } finally {
     }
   };
 
@@ -366,6 +365,7 @@ function useGlobalForm() {
       });
     } finally {
       await generarToken(data, total, discountCode);
+
     }
   };
 
@@ -376,9 +376,8 @@ function useGlobalForm() {
     updatePaymentDetails,
     resetFormData,
     submitGlobalForm,
+
   };
 }
 
 export default useGlobalForm;
-{
-}
