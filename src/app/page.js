@@ -8,7 +8,7 @@ import { useProduct } from "@/hooks/useProducts";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const { products } = useProduct();
+  const { products, isLoading} = useProduct();
   const { push } = useRouter();
 
   return (
@@ -45,35 +45,34 @@ export default function Home() {
       </div> */}
 
       <div>
-      <p className="font-geist text-start md:text-center tracking-tighter font-bold text-4xl md:text-7xl mb-5 mt-20  opacity-50 ml-5 ">
-      Descubre nuestras Remeras Oversize
+        <p className="font-geist text-start md:text-center tracking-tighter font-bold text-4xl md:text-7xl mb-5 mt-20  opacity-50 ml-5 ">
+          Descubre nuestras Remeras Oversize
         </p>
         <div className="flex max-w-screen ">
           <div className="md:flex  w-screen justify-center hidden ">
-            {products &&
+            {products
+              .filter((r) => r.subcategoria == "remera_oversize")
+              .slice(0, 4)
+              .map((e) => (
+                <div key={e._id}>
+                  <ProductCard product={e} isLoading={isLoading} />
+                </div>
+              ))}
+          </div>
+        </div>
+        <ScrollArea className="  rounded-md border md:hidden  block">
+          <div className="flex max-w-screen">
+            {
               products
                 .filter((r) => r.subcategoria == "remera_oversize")
-                .slice(0, 4)
                 .map((e) => (
                   <div key={e._id}>
                     <ProductCard product={e} />
                   </div>
                 ))}
+            <ScrollBar orientation="horizontal" />
           </div>
-        </div>
-        <ScrollArea className="  rounded-md border md:hidden  block">
-            <div className="flex max-w-screen">
-              {products &&
-                products
-                .filter((r) => r.subcategoria == "remera_oversize")
-                  .map((e) => (
-                    <div key={e._id}>
-                      <ProductCard product={e} />
-                    </div>
-                  ))}
-              <ScrollBar orientation="horizontal" />
-            </div>
-          </ScrollArea>
+        </ScrollArea>
       </div>
 
       {/* <div className="flex justify-around my-10 rounded-xl">

@@ -1,41 +1,27 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
 
-import useStore from "@/lib/cart";
 import { formatCurrency } from "@/lib/utils";
-import { useToast } from "./use-toast";
 import { useRouter } from "next/navigation";
-import { PaymentForm } from "../forms/PaymentForm";
-import { AddressForm } from "../forms/AddressForm";
-import gsap from "gsap";
+import { Skeleton } from "./skeleton";
 
-export const ProductCard = ({ product }) => {
-  const [size, setSize] = useState("");
-  const { toast } = useToast();
+export const ProductCard = ({ product,isLoading }) => {
   const { push } = useRouter();
-  const addToCart = useStore((state) => state.addToCart);
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Producto agregado al carrito correctamente",
-      description: "Completa tu compra",
-    });
-    addToCart(product, 1, size);
-  };
+  if (isLoading)
+    return (
+      <div className="flex flex-col space-y-3">
+        <Skeleton className="h-[125px] bg-black w-[250px] rounded-xl" />
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-[250px] bg-black" />
+          <Skeleton className="h-4 w-[200px] bg-black" />
+        </div>
+      </div>
+    );
 
-  useEffect(() => {
-    product &&
-      product.talles.map(
-        (e) => e.nombre.toLowerCase() == "m" && setSize(e.nombre)
-      );
-  }, []);
-  const mensaje = `Hola! te consulto por ${product.titulo}`;
-  const mensajeUrlEncoded_ = encodeURIComponent(mensaje);
-  const enlaceWaLink_ = `https://wa.me/5491132856744?text=${mensajeUrlEncoded_}`;
   return (
-    <div className="flex justify-center  m-2">
+    <div className="flex justify-center items-center m-2">
       <div
         className="w-[300px] md:w-[350px] cursor-pointer "
         onClick={() => push(`/product?_id=${product._id}`)}
@@ -44,7 +30,6 @@ export const ProductCard = ({ product }) => {
           <Card className="  bg-transparent w-10/12 border-none">
             <CardTitle className=" font-geist text-center text-xl text-white py-5  ">
               {product.titulo}
-
             </CardTitle>
             <CardContent
               className="h-[300px] md:h-[400px]  rounded-xl flex flex-col justify-end"
@@ -54,7 +39,6 @@ export const ProductCard = ({ product }) => {
                 backgroundPosition: "center",
               }}
             >
-
               <div>
                 <div className="flex justify-around items-end mt-5">
                   {product.precioDescuento ? (
@@ -73,7 +57,6 @@ export const ProductCard = ({ product }) => {
                     </p>
                   )}
                 </div>
-
               </div>
             </CardContent>
           </Card>

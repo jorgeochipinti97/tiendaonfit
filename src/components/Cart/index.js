@@ -39,22 +39,42 @@ export const Cart = ({ isToast }) => {
   const { toast } = useToast();
 
   const applyDiscountCode = (code, total) => {
-    const discount = discountCodes.find(
-      (discountCode) => discountCode.name.toLowerCase() === code.toLowerCase()
-    );
-    if (discount) {
-      const discountAmount = discount.isPercentaje
-        ? (total * discount.valor) / 100
-        : discount.valor;
-      setDiscountAmount(discountAmount);
-      toast({
-        title: "Codigo aplicado con éxito",
-      });
+    let discountAmount = 0;
+    const specialDiscountCodes = ["PROMOFIT2024"];
+
+    if (specialDiscountCodes.includes(code.toUpperCase())) {
+      if (total >= 60000) {
+        discountAmount = 20000;
+        toast({
+          title: "Código especial aplicado con éxito",
+        });
+      } else {
+        toast({
+          title:
+            "El total debe ser mayor o igual a 60,000 para usar este código",
+        });
+        return; // Salir de la función ya que no se puede aplicar el código especial
+      }
     } else {
-      toast({
-        title: "Código de descuento inválido o ya utilizado",
-      });
+      const discount = discountCodes.find(
+        (discountCode) => discountCode.name.toLowerCase() === code.toLowerCase()
+      );
+      if (discount) {
+        discountAmount = discount.isPercentaje
+          ? (total * discount.valor) / 100
+          : discount.valor;
+        toast({
+          title: "Código aplicado con éxito",
+        });
+      } else {
+        toast({
+          title: "Código de descuento inválido o ya utilizado",
+        });
+        return; // Salir de la función ya que no se encontró un código válido
+      }
     }
+
+    setDiscountAmount(discountAmount);
   };
 
   return (
