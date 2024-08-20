@@ -6,11 +6,14 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 
 import { useProduct } from "@/hooks/useProducts";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  const { products, isLoading} = useProduct();
+  const { products, isLoading } = useProduct();
   const { push } = useRouter();
-
+  useEffect(() => {
+    push && push("https://tienda.onfit.com.ar/");
+  }, [push]);
   return (
     <div style={{ backgroundSize: "cover" }} className="h-fit  bg-white pb-56">
       <p className="text-center opacity-70 font-geist tracking-tighter font-bold text-3xl mx-2 md:text-7xl py-5 md:py-10  ">
@@ -62,14 +65,13 @@ export default function Home() {
         </div>
         <ScrollArea className="  rounded-md border md:hidden  block">
           <div className="flex max-w-screen">
-            {
-              products
-                .filter((r) => r.subcategoria == "remera_oversize")
-                .map((e) => (
-                  <div key={e._id}>
-                    <ProductCard product={e} />
-                  </div>
-                ))}
+            {products
+              .filter((r) => r.subcategoria == "remera_oversize")
+              .map((e) => (
+                <div key={e._id}>
+                  <ProductCard product={e} />
+                </div>
+              ))}
             <ScrollBar orientation="horizontal" />
           </div>
         </ScrollArea>
